@@ -1,42 +1,45 @@
-<%= form_with(model: post, local: true) do |form| %>
-  <% if post.errors.any? %>
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
       <ul>
-      <% post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :post_user_id %>
+    <%= f.label :title %><br>
+    <%= f.text_field :title, id: :post_title  %>
   </div>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :post_title %>
+    <%= f.label :url %><br>
+    <%= f.text_field :url, id: :post_url %>
   </div>
 
-  <div class="field">
-    <%= form.label :url %>
-    <%= form.text_field :url, id: :post_url %>
+  <div class="message">
+    <strong><%= f.label " or" %></strong>
   </div>
+  <br>
 
   <div class="field">
-    <%= form.label :text %>
-    <%= form.text_area :text, id: :post_text %>
+    <%= f.label :text %><br>
+    <%= f.text_area :text, id: :post_text %>
   </div>
 
-  <div class="field">
-    <%= form.label :points %>
-    <%= form.number_field :points, id: :post_points %>
-  </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= f.submit %>
   </div>
+
+  <br>
+  <div class="message">
+    <%= f.label "Fill the url field or the text one, not both" %>
+  </div>
+
+
 <% end %>

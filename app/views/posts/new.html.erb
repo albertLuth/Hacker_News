@@ -1,5 +1,40 @@
-<h1>New Post</h1>
+<head>
+  <title>Submit | Hacker News</title>
+</head>
 
-<%= render 'form', post: @post %>
+<body>
+<center>
+  <table bgcolor="#f6f6ef" border="0" cellpadding="0" cellspacing="0" width="85%">
+    <tbody>
+    <tr>
+      <td bgcolor="ff6600">
+        <table style="padding:2px" border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tbody>
+          <tr>
+            <td style="width:18px;padding-right:4px">
+              <a style="text-decoration:none;" href="/"> <img src="https://news.ycombinator.com/y18.gif" width="18" height="18" style="border:1px white solid;"></a>
+            </td>
+            <td class="header">
+              <font size="4"> <b><a style="text-decoration:none;" href="/">Hacker News</a></b></font>
+              <font size="3">
+                <a style="text-decoration:none;" href="/posts">new</a> |
+              </font>
+            </td>
 
-<%= link_to 'Back', posts_path %>
+            <td class="spacer" style="width:10px"></td>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr style="height:10px"></tr>
+    <tr>
+      <td>
+        <div style="margin-left:20px">
+          <%= render 'form' %>
+        </div>
+      </td>
+    </tr>
+  </table>
+</center>
+</body>

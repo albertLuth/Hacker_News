@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
 
-  belongs_to :user
+  # belongs_to :user
 
-  validates :user_id, presence: true
+  # validates :user_id, presence: true
   validates :title, presence: true, length: {maximum: 60}
 
   validate :text_xor_url
