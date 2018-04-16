@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   # GET /ask
   # GET /ask.json
   def ask
-    @posts = Post.all.where(url: '').order('points DESC')
+    @posts = Post.all.where(url: '').order('created_at DESC')
     render "posts/index"
   end
 
