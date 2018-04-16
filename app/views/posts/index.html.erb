@@ -58,8 +58,7 @@
                   <td><font color="grey" size="3"><%= i %>.</font></td>
                   <td><%= post.points %></td>
                   <td> <i class="mdi-action-favorite red-text text-lighten-1"></i> <a href="#" onclick="AddValue()">0</a> </td>
-                  <td><%= post.title %></td>
-                  <td><%= post.url %></td>
+                  <td> <a href="<%= post.url %>" ><%= post.title %></a></td>
                   <td><%= post.text %></td>
                   <td><%= post.user_id %></td>
                   <td><%= link_to 'Show', post %></td>
