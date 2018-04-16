@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   get '/newest', to: "posts#newest"
+  get '/ask', to: "posts#ask"
 end

@@ -4,13 +4,20 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all.where.not(url: '').order('points ASC')
+    @posts = Post.all.where.not(url: '').order('points DESC')
   end
 
   # GET /newest
   # GET /newest.json
   def newest
     @posts = Post.all.order('created_at DESC')
+    render "posts/index"
+  end
+
+  # GET /ask
+  # GET /ask.json
+  def ask
+    @posts = Post.all.where(url: '').order('points DESC')
     render "posts/index"
   end
 
