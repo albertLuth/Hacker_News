@@ -3,12 +3,10 @@
 
     <script>
         var startingNumber = 0;
-
         function AddValue() {
             startingNumber++;
             $(this).text(startingNumber);
         }
-
     </script>
     <meta name="referrer" content="origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +33,8 @@
                     <b class="hnname">
                       <a href="news">Hacker News</a>
                     </b>
-                      <a href="/posts/new">submit</a>
+                    <a href="/posts/newest">new</a>
+                    <a href="/posts/new">submit</a>
                   </span>
                 </td>
 
@@ -58,10 +57,10 @@
                   <td><font color="grey" size="3"><%= i %>.</font></td>
                   <td><%= post.points %></td>
                   <td> <i class="mdi-action-favorite red-text text-lighten-1"></i> <a href="#" onclick="AddValue()">0</a> </td>
-                  <td><%= post.title %></td>
-                  <td><%= post.url %></td>
+                  <td> <a href="<%= post.url ? post.url : post.id %>" ><%= post.title %></a></td>
                   <td><%= post.text %></td>
                   <td><%= post.user_id %></td>
+                  <td><%= distance_of_time_in_words(Time.now, post.created_at) %></td>
                   <td><%= link_to 'Show', post %></td>
                   <td><%= link_to 'Edit', edit_post_path(post) %></td>
                   <td><%= link_to 'Destroy', post, method: :delete, data: {confirm: 'Are you sure?'} %></td>
