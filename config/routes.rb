@@ -6,4 +6,5 @@ Rails.application.routes.draw do
 
   get '/newest', to: "posts#newest"
   get '/ask', to: "posts#ask"
+
 end
