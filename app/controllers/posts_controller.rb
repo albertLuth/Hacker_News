@@ -7,8 +7,11 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  # GET /newest
+  # GET /newest.json
   def newest
-    @posts = Post.all
+    @posts = Post.all.order('created_at DESC')
+    render "posts/index"
   end
 
   # GET /posts/1

@@ -35,7 +35,7 @@
                     <b class="hnname">
                       <a href="news">Hacker News</a>
                     </b>
-                    <a href="/posts/newest">new</a>
+                    <a href="/newest">new</a>
                     <a href="/posts/new">submit</a>
                   </span>
                 </td>
@@ -59,7 +59,7 @@
                   <td><font color="grey" size="3"><%= i %>.</font></td>
                   <td><%= post.points %></td>
                   <td> <i class="mdi-action-favorite red-text text-lighten-1"></i> <a href="#" onclick="AddValue()">0</a> </td>
-                  <td> <a href="<%= post.url ? post.url : post.id %>" ><%= post.title %></a></td>
+                  <td> <a href="<%= post.url != "" ? post.url : '/posts/' + post.id.to_s %>" ><%= post.title %></a></td>
                   <td><%= post.text %></td>
                   <td><%= post.user_id %></td>
                   <td><%= distance_of_time_in_words(Time.now, post.created_at) %></td>
