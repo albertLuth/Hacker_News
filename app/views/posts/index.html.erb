@@ -41,9 +41,14 @@
                   </span>
                 </td>
 
-                <td style="text-align:right;padding-right:4px;"><span class="pagetop">
-                      <a id='me' href="user?id=manelfg24">manelfg24</a> (1) |
-                      <a id='logout' href="logout?auth=10e93f9607abf9c122dd591b56a5c2b23262378a&amp;goto=news">logout</a>
+                <td style="text-align:right;padding-right:4px;">
+                  <span class="pagetop">
+                      <% if current_user %>
+                        <%= current_user.name %> | 
+                        <%= link_to "logout", signout_path, id: "sign_out" %>
+                      <% else %>
+                        <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
+                      <% end %>
                   </span>
                 </td>
               </tr>
@@ -73,7 +78,6 @@
             </table>
           </td>
         </tr>
-
       </table>
     </center>
   </body>
