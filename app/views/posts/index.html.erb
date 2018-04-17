@@ -33,11 +33,15 @@
                 <td style="line-height:12pt; height:10px;">
                   <span class="pagetop">
                     <b class="hnname">
-                      <a href="news">Hacker News</a>
+                      <a href="/">Hacker News</a>
                     </b>
                     <a href="/newest">new</a>
                     <a href="/ask">ask</a>
-                    <a href="/posts/new">submit</a>
+                    <% if current_user %>
+                      <a href="/posts/new">submit</a>
+                    <% else %>
+                      <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
+                    <% end %>
                   </span>
                 </td>
 
