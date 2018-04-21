@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
+  protect_from_forgery
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+
 
   # GET /comments
   # GET /comments.json
@@ -25,10 +27,20 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
 
+    auth_user = current_user
+    begin
+      tmp = User.where("oauth_token=?", request.headers["HTTP_API_KEY"])[0]
+      if (tmp)
+        puts tmp.name
+        auth_user = tmp
+      end
+    rescue
 
-    @comment = Comment.new(comment_params)
+    end
 
-    @comment.user = current_user
+    if auth_user
+      @comment = Comment.new(comment_params)
+      @comment.user = auth_user
 
     respond_to do |format|
       if @comment.save
@@ -38,6 +50,9 @@ class CommentsController < ApplicationController
         format.html { render :new }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
+    end
+    else
+      redirect_to "/auth/google_oauth2"
     end
   end
 
