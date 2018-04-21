@@ -41,6 +41,7 @@ class CommentsController < ApplicationController
     if auth_user
       @comment = Comment.new(comment_params)
       @comment.user = auth_user
+      @comment.post = comment_params[3]
 
     respond_to do |format|
       if @comment.save
