@@ -1,29 +1,140 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%#= notice %></p>-->
 
-<p>
-  <strong>User:</strong>
-  <%= @post.user_id %>
-</p>
+<!--<p>-->
+<!--  <strong>User:</strong>-->
+  <%#= @post.user_id %>
+<!--</p>-->
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<!--<p>-->
+<!--  <strong>Title:</strong>-->
+  <%#= @post.title %>
+<!--</p>-->
 
-<p>
-  <strong>Url:</strong>
-  <%= @post.url %>
-</p>
+<!--<p>-->
+<!--  <strong>Url:</strong>-->
+  <%#= @post.url %>
+<!--</p>-->
 
-<p>
-  <strong>Text:</strong>
-  <%= @post.text %>
-</p>
+<!--<p>-->
+<!--  <strong>Text:</strong>-->
+  <%#= @post.text %>
+<!--</p>-->
 
-<p>
-  <strong>Points:</strong>
-  <%= @post.points %>
-</p>
+<!--<p>-->
+<!--  <strong>Points:</strong>-->
+  <%#= @post.points %>
+<!--</p>-->
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<!--<%#= link_to 'Edit', edit_post_path(@post) %> |-->
+<%#= link_to 'Back', posts_path %>
+
+<head>
+  <title><%= @post.title %> | Hacker News</title>
+</head>
+
+<body>
+<center>
+  <table bgcolor="#f6f6ef" border="0" cellpadding="0" cellspacing="0" width="85%">
+    <tbody>
+    <tr>
+      <td bgcolor="ff6600">
+        <table style="padding:2px" border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tbody>
+          <tr>
+            <td style="width:18px;padding-right:4px">
+              <a href="/"><img src="<%= asset_path( 'y18.gif' ) %>"></a>
+            </td>
+            <td class="header">
+              <font size="4"> <b><a href="/">Hacker News</a></b></font>
+              <font size="3">
+                <a href="/">new</a> |
+                <%if current_user %> <a href="/threads">threads</a> | <% end %>
+                <a href="/ask">ask</a> | <a href="/submissions/new">submit</a>
+              </font>
+            </td>
+            <td>
+             <span class="pagetop">
+                      <% if current_user %>
+                        <a href="/users/<%= current_user.id %>"><%= current_user.name %></a> |
+                 <%= link_to "logout", signout_path, id: "sign_out" %>
+                      <% else %>
+                        <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
+                      <% end %>
+             </span>
+            </td>
+            <td class="spacer" style="width:10px"></td>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr style="height:10px"></tr>
+    <tr>
+      <td>
+
+        <div>
+          <a href="/posts/<%= @post.id %>">
+            <%= @post.title %>
+          </a>
+          <br>
+          submitted by <a href="/users/<%= @post.user.id %>">
+          <%= @post.user.name %></a>
+        </div>
+
+        <div style="margin-left:20px">
+          <form action="/comments" method="POST" id="comment_content_form">
+
+              <input type="hidden" name="comment[user_id]" value=<%= current_user.id %>>
+              <input type="hidden" name="comment[post_id]" value=<%= @post.id %>>
+              <textarea name="comment[content]" value="" form="comment_content_form" style="min-width:500px;min-height:100px"></textarea>
+              <br>
+              <input type="submit" value="add comment">
+          </form>
+        </div>
+
+        <%# @comments = Comment.where("post_id=?", @post.id).order("created_at DESC") %>
+        <% @comments.each do |comment| %>
+        <div style="margin-left:10px">
+          <table>
+            <tr>
+
+              <td><a href="/users/<%= comment.user.id %>"><%= comment.user.name %></a>
+
+                <%= distance_of_time_in_words(Time.now, post.created_at) %>
+
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td style="color:grey;"> <%= comment.content %></td>
+            </tr>
+          </table>
+          <a href="/comments/<%= comment.id %>/new_reply">reply</a>
+        </div>
+
+          <% @replies = Reply.where("comment_id=?", comment.id).order("created_at DESC") %>
+          <% @replies.each do |reply| %>
+            <div style="color:grey;margin-left:25px">
+              <table>
+                <tr>
+
+                  <td><a href="/users/<%= reply.comment.user.id %>"><%= reply.user.name %></a>
+
+                    <%= distance_of_time_in_words(Time.now, post.created_at) %>
+
+                    </tr>
+              </table>
+              <table>
+                <tr>
+                  <td> <%= reply.content %></td>
+                </tr>
+              </table>
+            </div>
+          <% end %>
+          <br>
+          <% end %>
+      </td>
+    </tr>
+  </table>
+</center>
+</body>
