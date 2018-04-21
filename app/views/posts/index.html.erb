@@ -31,17 +31,26 @@
                 <td style="line-height:12pt; height:10px;">
                   <span class="pagetop">
                     <b class="hnname">
-                      <a href="news">Hacker News</a>
+                      <a href="/">Hacker News</a>
                     </b>
                     <a href="/newest">new</a>
                     <a href="/ask">ask</a>
-                    <a href="/posts/new">submit</a>
+                    <% if current_user %>
+                      <a href="/posts/new">submit</a>
+                    <% else %>
+                      <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
+                    <% end %>
                   </span>
                 </td>
 
-                <td style="text-align:right;padding-right:4px;"><span class="pagetop">
-                      <a id='me' href="user?id=manelfg24">manelfg24</a> (1) |
-                      <a id='logout' href="logout?auth=10e93f9607abf9c122dd591b56a5c2b23262378a&amp;goto=news">logout</a>
+                <td style="text-align:right;padding-right:4px;">
+                  <span class="pagetop">
+                      <% if current_user %>
+                        <a href="/users/<%= current_user.id =%>"><%= current_user.name =%></a> | 
+                        <%= link_to "logout", signout_path, id: "sign_out" %>
+                      <% else %>
+                        <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
+                      <% end %>
                   </span>
                 </td>
               </tr>
@@ -60,7 +69,7 @@
                   <td> <i class="mdi-action-favorite red-text text-lighten-1"></i> <a href="#" onclick="AddValue()">0</a> </td>
                   <td> <a href="<%= post.url != "" ? post.url : '/posts/' + post.id.to_s %>" ><%= post.title %></a></td>
                   <td><%= post.text %></td>
-                  <td><%= post.user_id %></td>
+                  <td><a href="/users/<%= post.user_id =%>"><%= post.user_name %></a></td>
                   <td><%= distance_of_time_in_words(Time.now, post.created_at) %></td>
                   <td><%= link_to 'Show', post %></td>
                   <td><%= link_to 'Edit', edit_post_path(post) %></td>
@@ -71,7 +80,6 @@
             </table>
           </td>
         </tr>
-
       </table>
     </center>
   </body>
