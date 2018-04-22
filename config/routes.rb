@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
+  # post '/comments', to: 'comments#create'
+
   resources :posts
   resources :users
   resources :comments

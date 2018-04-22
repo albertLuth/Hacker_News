@@ -49,7 +49,7 @@
               <font size="3">
                 <a href="/">new</a> |
                 <%if current_user %> <a href="/threads">threads</a> | <% end %>
-                <a href="/ask">ask</a> | <a href="/submissions/new">submit</a>
+                <a href="/ask">ask</a> | <a href="/posts/new">submit</a>
               </font>
             </td>
             <td>
@@ -90,6 +90,20 @@
               <br>
               <input type="submit" value="add comment">
           </form>
+          <%#= form_for(@comment) do |f| %>
+
+            <%#= f.hidden_field :post_id, value: @post.id %>
+            <%#= f.hidden_field :user_id, value: current_user.id %>
+
+<!--            <div class="field">-->
+              <%#= f.label :content %>
+              <%#= f.text_area :content, id: :comment_content %>
+<!--            </div>-->
+
+<!--            <div class="actions">-->
+              <%#= f.submit %>
+<!--            </div>-->
+          <%# end %>
         </div>
 
         <%# @comments = Comment.where("post_id=?", @post.id).order("created_at DESC") %>
@@ -100,7 +114,7 @@
 
               <td><a href="/users/<%= comment.user.id %>"><%= comment.user.name %></a>
 
-                <%= distance_of_time_in_words(Time.now, post.created_at) %>
+                <%= distance_of_time_in_words(Time.now, comment.created_at) %>
 
             </tr>
           </table>
@@ -120,7 +134,7 @@
 
                   <td><a href="/users/<%= reply.comment.user.id %>"><%= reply.user.name %></a>
 
-                    <%= distance_of_time_in_words(Time.now, post.created_at) %>
+                    <%= distance_of_time_in_words(Time.now, reply.created_at) %>
 
                     </tr>
               </table>
