@@ -1,19 +1,136 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%#= notice %></p>
 
 <p>
   <strong>Content:</strong>
-  <%= @comment.content %>
+  <%#= @comment.content %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @comment.user_id %>
+  <%#= @comment.user_id %>
 </p>
 
 <p>
   <strong>Post:</strong>
-  <%= @comment.post_id %>
+  <%#= @comment.post_id %>
 </p>
 
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>
+<%#= link_to 'Edit', edit_comment_path(@comment) %> |
+<%#= link_to 'Back', comments_path %>-->
+
+<!--<p id="notice"><%#= notice %></p>-->
+
+<!--<p>-->
+<!--  <strong>User:</strong>-->
+<%#= @post.user_id %>
+<!--</p>-->
+
+<!--<p>-->
+<!--  <strong>Title:</strong>-->
+<%#= @post.title %>
+<!--</p>-->
+
+<!--<p>-->
+<!--  <strong>Url:</strong>-->
+<%#= @post.url %>
+<!--</p>-->
+
+<!--<p>-->
+<!--  <strong>Text:</strong>-->
+<%#= @post.text %>
+<!--</p>-->
+
+<!--<p>-->
+<!--  <strong>Points:</strong>-->
+<%#= @post.points %>
+<!--</p>-->
+
+<!--<%#= link_to 'Edit', edit_post_path(@post) %> |-->
+<%#= link_to 'Back', posts_path %>
+
+<head>
+  <title> Add Comment | Hacker News</title>
+</head>
+
+<body>
+<center>
+  <table bgcolor="#f6f6ef" border="0" cellpadding="0" cellspacing="0" width="85%">
+    <tbody>
+    <tr>
+      <td bgcolor="ff6600">
+        <table style="padding:2px" border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tbody>
+          <tr>
+            <td style="width:18px;padding-right:4px">
+              <a href="/"><img src="<%= asset_path( 'y18.gif' ) %>"></a>
+            </td>
+            <td class="header">
+              <font size="4"> <b><a href="/">Hacker News</a></b></font>
+              <font size="3">
+                <a href="/">new</a> |
+                <%if current_user %> <a href="/threads">threads</a> | <% end %>
+                <a href="/ask">ask</a> | <a href="/posts/new">submit</a>
+              </font>
+            </td>
+            <td>
+             <span class="pagetop">
+                      <% if current_user %>
+                        <a href="/users/<%= current_user.id %>"><%= current_user.name %></a> |
+                 <%= link_to "logout", signout_path, id: "sign_out" %>
+                      <% else %>
+                        <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
+                      <% end %>
+             </span>
+            </td>
+            <td class="spacer" style="width:10px"></td>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr style="height:10px"></tr>
+    <tr>
+      <td>
+
+        <div>
+          <p>
+            <%= @comment.content %>
+          </p>
+          <br>
+          submitted by <a href="/users/<%= @comment.user.id %>">
+          <%= @comment.user.name %></a>
+        </div>
+
+        <div style="margin-left:20px">
+<!--          <form action="/comments" method="POST" id="comment_content_form">
+
+            <input type="hidden" name="comment[user_id]" id="comment_user_id" value=<%#= current_user.id %>>
+            <input type="hidden" name="comment[post_id]" id="comment_post_id" value=<%#= @comment.post_id %>>
+            <textarea name="comment[content]" value="" form="comment_content_form" style="min-width:500px;min-height:100px"></textarea>
+            <input type="hidden" name="comment[comment_id]" id: :comment_comment_id" value=<%#= @comment.id %>>
+            <br>
+            <input type="submit" value="add reply">
+          </form>-->
+          <%= form_for(@comment) do |f| %>
+
+          <%= f.hidden_field :post_id, value: @post.id %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+
+                      <div class="field">
+          <%= f.label :content %>
+          <%= f.text_area :content, id: :comment_content %>
+                      </div>
+
+                      <div class="actions">
+          <%= f.submit %>
+                      </div>
+          <% end %>
+        </div>
+
+        <%# @comments = Comment.where("post_id=?", @post.id).order("created_at DESC") %>
+
+      </td>
+    </tr>
+  </table>
+</center>
+</body>

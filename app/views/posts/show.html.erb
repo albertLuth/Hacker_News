@@ -82,28 +82,29 @@
         </div>
 
         <div style="margin-left:20px">
-          <form action="/comments" method="POST" id="comment_content_form">
+<!--          <form action="/comments" method="POST" id="comment_content_form">
 
-              <input type="hidden" name="comment[user_id]" value=<%= current_user.id %>>
-              <input type="hidden" name="comment[post_id]" value=<%= @post.id %>>
+              <input type="hidden" name="comment[user_id]" value=<%#= current_user.id %>>
+              <input type="hidden" name="comment[post_id]" value=<%#= @post.id %>>
               <textarea name="comment[content]" value="" form="comment_content_form" style="min-width:500px;min-height:100px"></textarea>
               <br>
               <input type="submit" value="add comment">
-          </form>
-          <%#= form_for(@comment) do |f| %>
+          </form>-->
 
-            <%#= f.hidden_field :post_id, value: @post.id %>
-            <%#= f.hidden_field :user_id, value: current_user.id %>
+          <%= form_for(@comment) do |f| %>
 
-<!--            <div class="field">-->
-              <%#= f.label :content %>
-              <%#= f.text_area :content, id: :comment_content %>
-<!--            </div>-->
+            <%= f.hidden_field :post_id, value: @post.id %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
 
-<!--            <div class="actions">-->
-              <%#= f.submit %>
-<!--            </div>-->
-          <%# end %>
+            <div class="field">
+              <%= f.label :content %>
+              <%= f.text_area :content, id: :comment_content %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit %>
+            </div>
+          <% end %>
         </div>
 
         <%# @comments = Comment.where("post_id=?", @post.id).order("created_at DESC") %>
@@ -123,16 +124,16 @@
               <td style="color:grey;"> <%= comment.content %></td>
             </tr>
           </table>
-          <a href="/comments/<%= comment.id %>/new_reply">reply</a>
+          <a href="/comments/<%= comment.id %>">reply</a>
         </div>
 
-          <% @replies = Reply.where("comment_id=?", comment.id).order("created_at DESC") %>
+          <% @replies = Comment.where("comment_id=?", comment.id).order("created_at DESC") %>
           <% @replies.each do |reply| %>
             <div style="color:grey;margin-left:25px">
               <table>
                 <tr>
 
-                  <td><a href="/users/<%= reply.comment.user.id %>"><%= reply.user.name %></a>
+                  <td><a href="/users/<%= reply.user.id %>"><%= reply.user.name %></a>
 
                     <%= distance_of_time_in_words(Time.now, reply.created_at) %>
 
