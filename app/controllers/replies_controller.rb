@@ -26,7 +26,7 @@ class RepliesController < ApplicationController
   # POST /replies.json
   def create
     @reply = Reply.new(reply_params)
-    
+
     respond_to do |format|
       if @reply.save
         format.html { redirect_to @reply.comment.post, notice: 'Reply was successfully created.' }

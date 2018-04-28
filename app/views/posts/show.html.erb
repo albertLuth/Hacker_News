@@ -82,14 +82,16 @@
         </div>
 
         <div style="margin-left:20px">
-          <form action="/comments" method="POST" id="comment_content_form">
+          <% if current_user %>
+            <form action="/comments" method="POST" id="comment_content_form">
 
-              <input type="hidden" name="comment[user_id]" value=<%= current_user.id %>>
-              <input type="hidden" name="comment[post_id]" value=<%= @post.id %>>
-              <textarea name="comment[content]" value="" form="comment_content_form" style="min-width:500px;min-height:100px"></textarea>
-              <br>
-              <input type="submit" value="add comment">
-          </form>
+                <input type="hidden" name="comment[user_id]" value=<%= current_user.id %>>
+                <input type="hidden" name="comment[post_id]" value=<%= @post.id %>>
+                <textarea name="comment[content]" value="" form="comment_content_form" style="min-width:500px;min-height:100px"></textarea>
+                <br>
+                <input type="submit" value="add comment">
+            </form>
+          <%end%>
 
           <%#= form_for(@comment) do |f| %>
 
@@ -124,7 +126,9 @@
               <td style="color:grey;"> <%= comment.content %></td>
             </tr>
           </table>
-          <a href="/comments/<%= comment.id %>">reply</a>
+          <% if current_user %>
+            <a href="/comments/<%= comment.id %>">reply</a>
+          <%end%>
         </div>
 
           <% @replies = Reply.where("comment_id=?", comment.id).order("created_at DESC") %>

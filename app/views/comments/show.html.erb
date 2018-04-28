@@ -102,15 +102,16 @@
         </div>
 
         <div style="margin-left:20px">
-         <form action="/replies" method="POST" id="reply_content_form">
+           <form action="/replies" method="POST" id="reply_content_form">
 
-            <input type="hidden" name="reply[user_id]"  value=<%= current_user.id %>>
-<!--            <input type="hidden" name="reply[post_id]"  value=<%#= @comment.post_id %>>-->
-            <textarea name="reply[content]" value="" form="reply_content_form" style="min-width:500px;min-height:100px"></textarea>
-            <input type="hidden" name="reply[comment_id]"  value=<%= @comment.id %>>
-            <br>
-            <input type="submit" value="add reply">
-          </form>
+              <input type="hidden" name="reply[user_id]"  value=<%= current_user.id %>>
+  <!--            <input type="hidden" name="reply[post_id]"  value=<%#= @comment.post_id %>>-->
+              <textarea name="reply[content]" value="" form="reply_content_form" style="min-width:500px;min-height:100px"></textarea>
+              <input type="hidden" name="reply[comment_id]"  value=<%= @comment.id %>>
+              <br>
+              <input type="submit" value="add reply">
+            </form>
+
           <%#= form_for(@comment) do |f| %>
 
           <%#= f.hidden_field :post_id, value: @post.id %>
