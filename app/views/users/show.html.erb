@@ -67,13 +67,16 @@
                     <%= @user.name %>
                   </p>
                   <p>
-                    <a href="/ask/<%= @user.id =%>"><%= "Asks" %></a>
+                    <strong>Email:</strong>
+                    <%= @user.email %>
                   </p>
                   <p>
-                      <%= link_to 'Edit', edit_user_path(current_user) %>
+                      <% if current_user == @user %>
+                          <%= link_to "Edit Profile", edit_user_path(current_user) %></td>
+                      <%end%>
                   </p>
                   <p>
-                      <%= link_to 'Destroy', current_user, method: :delete, data: {confirm: 'Are you sure?'} %>
+                      <%= link_to 'Delete', current_user, method: :delete, data: {confirm: 'Are you sure?'} %>
                   </p>
                   <p>
                       <%= link_to 'Back', "/newest/" %>

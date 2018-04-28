@@ -46,7 +46,7 @@
                 <td style="text-align:right;padding-right:4px;">
                   <span class="pagetop">
                       <% if current_user %>
-                        <a href="/users/<%= current_user.id =%>"><%= current_user.name =%></a> | 
+                        <a href="/users/<%= current_user.id =%>"><%= current_user.name =%></a> |
                         <%= link_to "logout", signout_path, id: "sign_out" %>
                       <% else %>
                         <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
@@ -65,8 +65,8 @@
               <% @posts.each do |post| %>
                 <tr>
                   <td><font color="grey" size="3"><%= i %>.</font></td>
-                  <td><%= post.points %></td>
-                  <td> <i class="mdi-action-favorite red-text text-lighten-1"></i> <a href="#" onclick="AddValue()">0</a> </td>
+                  <td><%= link.upvotes %></td>
+                  <td> <i class="mdi-action-favorite red-text text-lighten-1"></i> <a href="#" onclick="Link.upvotes">0</a> </td>
                   <td> <a href="<%= post.url != "" ? post.url : '/posts/' + post.id.to_s %>" ><%= post.title %></a></td>
                   <td><%= post.text %></td>
                   <td><a href="/users/<%= post.user_id =%>"><%= post.user_name %></a></td>
