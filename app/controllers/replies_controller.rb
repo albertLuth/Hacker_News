@@ -1,4 +1,5 @@
 class RepliesController < ApplicationController
+  protect_from_forgery
   before_action :set_reply, only: [:show, :edit, :update, :destroy]
 
   # GET /replies
@@ -28,7 +29,7 @@ class RepliesController < ApplicationController
 
     respond_to do |format|
       if @reply.save
-        format.html { redirect_to @reply, notice: 'Reply was successfully created.' }
+        format.html { redirect_to @reply.comment.post, notice: 'Reply was successfully created.' }
         format.json { render :show, status: :created, location: @reply }
       else
         format.html { render :new }

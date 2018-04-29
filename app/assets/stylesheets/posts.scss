@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 body  { font-family:Verdana, Geneva, sans-serif; font-size:10pt; color:#828282;}
 td    { font-family:Verdana, Geneva, sans-serif; font-size:10pt; color:#828282; }
 
@@ -13,8 +14,16 @@ input    { font-family:monospace; font-size:10pt; }
 input[type=\"submit\"] { font-family:Verdana, Geneva, sans-serif; }
 textarea { font-family:monospace; font-size:10pt; }
 
+#tipus:hover          { color: #000000; text-decoration:none; background-color: transparent; }
+.estiloCabecera:hover { color:#000000; text-decoration:none; background-color: transparent; }
+.estiloLink:hover     { color: #000000; text-decoration: underline; background-color: transparent; }
+
+
 a:link    { color:#000000; text-decoration:none; }
 a:visited { color:#828282; text-decoration:none; }
+a:hover { background-color: transparent }
+
+
 
 .default { font-family:Verdana, Geneva, sans-serif; font-size: 10pt; color:#828282; }
 .admin   { font-family:Verdana, Geneva, sans-serif; font-size:8.5pt; color:#000000; }

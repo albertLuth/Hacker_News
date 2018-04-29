@@ -23,6 +23,7 @@ class CommentsController < ApplicationController
   def edit
   end
 
+
   # POST /comments
   # POST /comments.json
   def create
@@ -39,7 +40,7 @@ class CommentsController < ApplicationController
     end
 
     # if auth_user
-      @comment = Comment.new(comment_params)
+    @comment = Comment.new(comment_params)
       # @comment.user = auth_user
       # @comment.post = comment_params[3]
 

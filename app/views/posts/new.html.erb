@@ -1,29 +1,51 @@
 <head>
+  <meta name="referrer" content="origin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/scss" href="posts.scss">
+  <link rel="shortcut icon" href="favicon.ico">
   <title>Submit | Hacker News</title>
 </head>
 
 <body>
 <center>
-  <table bgcolor="#f6f6ef" border="0" cellpadding="0" cellspacing="0" width="85%">
-    <tbody>
+  <table id="hnmain" border="0" cellpadding="0" cellspacing="0" width="85%" bgcolor="#f6f6ef">
     <tr>
-      <td bgcolor="ff6600">
-        <table style="padding:2px" border="0" cellpadding="0" cellspacing="0" width="100%">
-          <tbody>
+      <td bgcolor="#ff6600">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:2px">
           <tr>
             <td style="width:18px;padding-right:4px">
-              <a style="text-decoration:none;" href="/"> <img src="https://news.ycombinator.com/y18.gif" width="18" height="18" style="border:1px white solid;"></a>
-            </td>
-            <td class="header">
-              <font size="4"> <b><a style="text-decoration:none;" href="/">Hacker News</a></b></font>
-              <font size="3">
-                <a style="text-decoration:none;" href="/posts">new</a> |
-              </font>
+              <a>
+                <img src="https://news.ycombinator.com/y18.gif" width="18" height="18" style="border:1px white solid; background-color: transparent">
+              </a>
             </td>
 
-            <td class="spacer" style="width:10px"></td>
+            <td style="line-height:12pt; height:10px;">
+                    <span class="pagetop">
+                      <b class="hnname">
+                        <a id="tipus" href="/">Hacker News</a>
+                      </b>
+                      <a id="tipus" href="/newest">new</a> |
+                      <%if current_user %> <a id="tipus" href="/threads">threads</a> | <% end %>
+                      <a id="tipus" href="/ask">ask</a> |
+                      <% if current_user %>
+                        <a id="tipus" href="/posts/new">submit</a>
+                      <% else %>
+                        <%= link_to "login", "/auth/google_oauth2", id: "sign_in", class: 'estiloCabecera' %>
+                      <% end %>
+                    </span>
+            </td>
+
+            <td style="text-align:right;padding-right:4px;">
+                    <span class="pagetop">
+                        <% if current_user %>
+                          <a id="tipus" href="/users/<%= current_user.id %>"><%= current_user.name %></a> |
+                        <%= link_to "logout", signout_path, id: "sign_out", class: 'estiloCabecera' %>
+                        <% else %>
+                          <%= link_to "login", "/auth/google_oauth2", id: "sign_in", class: 'estiloCabecera' %>
+                        <% end %>
+                    </span>
+            </td>
           </tr>
-          </tbody>
         </table>
       </td>
     </tr>

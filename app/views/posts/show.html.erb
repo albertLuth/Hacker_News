@@ -29,42 +29,53 @@
 <%#= link_to 'Back', posts_path %>
 
 <head>
+  <meta name="referrer" content="origin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/scss" href="posts.scss">
+  <link rel="shortcut icon" href="favicon.ico">
   <title><%= @post.title %> | Hacker News</title>
 </head>
 
 <body>
 <center>
-  <table bgcolor="#f6f6ef" border="0" cellpadding="0" cellspacing="0" width="85%">
-    <tbody>
+  <table id="hnmain" border="0" cellpadding="0" cellspacing="0" width="85%" bgcolor="#f6f6ef">
     <tr>
-      <td bgcolor="ff6600">
-        <table style="padding:2px" border="0" cellpadding="0" cellspacing="0" width="100%">
-          <tbody>
+      <td bgcolor="#ff6600">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:2px">
           <tr>
             <td style="width:18px;padding-right:4px">
-              <a href="/"><img src="<%= asset_path( 'y18.gif' ) %>"></a>
+              <a>
+                <img src="https://news.ycombinator.com/y18.gif" width="18" height="18" style="border:1px white solid; background-color: transparent">
+              </a>
             </td>
-            <td class="header">
-              <font size="4"> <b><a href="/">Hacker News</a></b></font>
-              <font size="3">
-                <a href="/">new</a> |
-                <%if current_user %> <a href="/threads">threads</a> | <% end %>
-                <a href="/ask">ask</a> | <a href="/posts/new">submit</a>
-              </font>
+
+            <td style="line-height:12pt; height:10px;">
+                      <span class="pagetop">
+                        <b class="hnname">
+                          <a id="tipus" href="/">Hacker News</a>
+                        </b>
+                        <a id="tipus" href="/newest">new</a> |
+                        <% if current_user %> <a id="tipus" href="/threads">threads</a> | <% end %>
+                        <a id="tipus" href="/ask">ask</a> |
+                        <% if current_user %>
+                          <a id="tipus" href="/posts/new">submit</a>
+                        <% else %>
+                          <%= link_to "login", "/auth/google_oauth2", id: "sign_in", class: 'estiloCabecera' %>
+                        <% end %>
+                      </span>
             </td>
-            <td>
-             <span class="pagetop">
-                      <% if current_user %>
-                        <a href="/users/<%= current_user.id %>"><%= current_user.name %></a> |
-                 <%= link_to "logout", signout_path, id: "sign_out" %>
-                      <% else %>
-                        <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
-                      <% end %>
-             </span>
+
+            <td style="text-align:right;padding-right:4px;">
+                      <span class="pagetop">
+                          <% if current_user %>
+                            <a id="tipus" href="/users/<%= current_user.id %>"><%= current_user.name %></a> |
+                          <%= link_to "logout", signout_path, id: "sign_out", class: 'estiloCabecera' %>
+                          <% else %>
+                            <%= link_to "login", "/auth/google_oauth2", id: "sign_in", class: 'estiloCabecera' %>
+                          <% end %>
+                      </span>
             </td>
-            <td class="spacer" style="width:10px"></td>
           </tr>
-          </tbody>
         </table>
       </td>
     </tr>
@@ -73,23 +84,26 @@
       <td>
 
         <div>
-          <a href="/posts/<%= @post.id %>">
+          <a id="tipus" href="/posts/<%= @post.id %>">
             <%= @post.title %>
           </a>
           <br>
-          submitted by <a href="/users/<%= @post.user.id %>">
+          submitted by <a  class="estiloLink" href="/users/<%= @post.user.id %>">
           <%= @post.user.name %></a>
         </div>
 
         <div style="margin-left:20px">
-          <form action="/comments" method="POST" id="comment_content_form">
+          <% if current_user %>
+            <form action="/comments" method="POST" id="comment_content_form">
 
-              <input type="hidden" name="comment[user_id]" value=<%= current_user.id %>>
-              <input type="hidden" name="comment[post_id]" value=<%= @post.id %>>
-              <textarea name="comment[content]" value="" form="comment_content_form" style="min-width:500px;min-height:100px"></textarea>
-              <br>
-              <input type="submit" value="add comment">
-          </form>
+                <input type="hidden" name="comment[user_id]" value=<%= current_user.id %>>
+                <input type="hidden" name="comment[post_id]" value=<%= @post.id %>>
+                <textarea name="comment[content]" value="" form="comment_content_form" style="min-width:500px;min-height:100px"></textarea>
+                <br>
+                <input type="submit" value="add comment">
+            </form>
+          <%end%>
+
           <%#= form_for(@comment) do |f| %>
 
             <%#= f.hidden_field :post_id, value: @post.id %>
@@ -112,7 +126,7 @@
           <table>
             <tr>
 
-              <td><a href="/users/<%= comment.user.id %>"><%= comment.user.name %></a>
+              <td><a class="estiloLink" href="/users/<%= comment.user.id %>"><%= comment.user.name %></a>
 
                 <%= distance_of_time_in_words(Time.now, comment.created_at) %>
 
@@ -123,7 +137,9 @@
               <td style="color:grey;"> <%= comment.content %></td>
             </tr>
           </table>
-          <a href="/comments/<%= comment.id %>/new_reply">reply</a>
+          <% if current_user %>
+            <a class="estiloLink" href="/comments/<%= comment.id %>">reply</a>
+          <%end%>
         </div>
 
           <% @replies = Reply.where("comment_id=?", comment.id).order("created_at DESC") %>
@@ -132,7 +148,7 @@
               <table>
                 <tr>
 
-                  <td><a href="/users/<%= reply.comment.user.id %>"><%= reply.user.name %></a>
+                  <td><a href="/users/<%= reply.user.id %>"><%= reply.user.name %></a>
 
                     <%= distance_of_time_in_words(Time.now, reply.created_at) %>
 
