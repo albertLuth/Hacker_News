@@ -24,21 +24,21 @@
               <tr>
                 <td style="width:18px;padding-right:4px">
                   <a>
-                  <img src="https://news.ycombinator.com/y18.gif" width="18" height="18" style="border:1px white solid;">
+                  <img src="https://news.ycombinator.com/y18.gif" width="18" height="18" style="border:1px white solid; background-color: transparent">
                   </a>
                 </td>
 
                 <td style="line-height:12pt; height:10px;">
                   <span class="pagetop">
                     <b class="hnname">
-                      <a href="/">Hacker News</a>
+                      <a id="tipus" href="/">Hacker News</a>
                     </b>
-                    <a href="/newest">new</a>
-                    <a href="/ask">ask</a>
+                    <a id="tipus" href="/newest">new</a> |
+                    <a id="tipus" href="/ask">ask</a> |
                     <% if current_user %>
-                      <a href="/posts/new">submit</a>
+                      <a id="tipus" href="/posts/new">submit</a>
                     <% else %>
-                      <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
+                      <%= link_to "login", "/auth/google_oauth2", id: "sign_in", class: 'estiloCabecera' %>
                     <% end %>
                   </span>
                 </td>
@@ -46,10 +46,10 @@
                 <td style="text-align:right;padding-right:4px;">
                   <span class="pagetop">
                       <% if current_user %>
-                        <a href="/users/<%= current_user.id %>"><%= current_user.name %></a> |
-                        <%= link_to "logout", signout_path, id: "sign_out" %>
+                        <a id="tipus" href="/users/<%= current_user.id %>"><%= current_user.name %></a> |
+                        <%= link_to "logout", signout_path, id: "sign_out", class: 'estiloCabecera' %>
                       <% else %>
-                        <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
+                        <%= link_to "login", "/auth/google_oauth2", id: "sign_in", class: 'estiloCabecera' %>
                       <% end %>
                   </span>
                 </td>
@@ -67,17 +67,17 @@
                   <td><font color="grey" size="3"><%= i %>.</font></td>
                   <td><%= post.points %></td>
                   <td> <i class="mdi-action-favorite red-text text-lighten-1"></i> <a href="#" onclick="AddValue()">0</a> </td>
-                  <td> <a href="<%= post.url != "" ? post.url : '/posts/' + post.id.to_s %>" ><%= post.title %></a></td>
+                  <td> <a class="estiloLink" href="<%= post.url != "" ? post.url : '/posts/' + post.id.to_s %>" ><%= post.title %></a></td>
                   <td><%= post.text %></td>
-                  <td><a href="/users/<%= post.user_id %>"><%= post.user_name %></a></td>
+                  <td><a class="estiloLink" href="/users/<%= post.user_id %>"><%= post.user_name %></a></td>
                   <td><%= distance_of_time_in_words(Time.now, post.created_at) %></td>
-                  <td><%= link_to 'Show', post %></td>
-                  <td><%= link_to 'Edit', edit_post_path(post) %></td>
-                  <td><%= link_to 'Destroy', post, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+                  <td><%= link_to 'Show', post , class: 'estiloLink'%></td>
+                  <td><%= link_to 'Edit', edit_post_path(post) , class: 'estiloLink'%></td>
+                  <td><%= link_to 'Destroy', post, method: :delete, data: {confirm: 'Are you sure?'} , class: 'estiloLink'%></td>
                 </tr>
                 <tr>
                   <td>
-                    <a style="text-decoration:none;" href="/posts/<%= post.id %>"><%= Comment.where('post_id = ?', post.id).length %></a> comments
+                    <a class="estiloLink" href="/posts/<%= post.id %>"><%= Comment.where('post_id = ?', post.id).length%> comments</a>
                   </td>
                 </tr>
                 <% i = i+1 %>
