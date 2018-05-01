@@ -63,42 +63,45 @@
 
         <tr>
           <td>
+            <% i=1 %>
+            <% @posts.each do |post| %>
             <table>
-              <% i=1 %>
-              <% @posts.each do |post| %>
                 <tr>
                   <td><font color="grey" size="3"><%= i %>.</font></td>
 
-                  <% if logged_in? && current_user.upvoted?(post) %>
+                  <% if logged_in? && current_user.upvoted?(post) && current_user.id != post.user_id%>
                     <span class="upvote-post">
-                    <td><%= link_to "unvote(upvote)", upvote_post_path(post), method: :post %></td>
+                    <td><%= link_to image_tag("arrow_down.png", border:
+                                              0), upvote_post_path(post), class: 'estiloLink' , method: :post %></td>
                     </span>
-                    <%elsif  logged_in? && !current_user.upvoted?(post)%>
+                    <%elsif  logged_in? && !current_user.upvoted?(post) && current_user.id != post.user_id%>
                       <span class="upvote-post">
-                      <td><%= link_to "upvote", upvote_post_path(post), method: :post %></td>
+                      <td><%= link_to image_tag("arrow_up.png", border:
+                          0), upvote_post_path(post), class: 'estiloLink' , method: :post %></td>
                       </span>
                   <%end%>
-                  <% if logged_in? && current_user.downvoted?(post) %>
-                    <span class="downvote-post">
-                    <td><%= link_to "unvote(downvote)", downvote_post_path(post), method: :post %></td>
+                  <!--
+                  <%#if logged_in? && current_user.downvoted?(post) %>
+                   <span class="downvote-post">
+                   <td><%#= link_to image_tag("arrow_down.png", border:
+                       0), downvote_post_path(post), class: 'estiloLink' , method: :post %></td>
                     </span>
-                    <%elsif  logged_in? && !current_user.downvoted?(post)%>
+                    <%#elsif  logged_in? && !current_user.downvoted?(post)%>
                       <span class="downvote-post">
-                      <td><%= link_to "downvote", downvote_post_path(post), method: :post %></td>
-                      </span>
-                  <%end%>
+                     <td><%#= link_to image_tag("arrow_down.png", border:
+                          0), downvote_post_path(post), class: 'estiloLink' , method: :post %></td>-
+                     </span>
+                  <%#end%>-->
                   <span class="points">
-                  <td><%= pluralize(post.calc_hot_score, 'point') %> by <%= post.user_name%></td>
+                  <td><%= pluralize(post.points, 'point') %> by <a class="estiloLink" href="/users/<%= post.user_id %>"><%= post.user_name %></a></td>
                   </span>
                   <td> <a class="estiloLink" href="<%= post.url != "" ? post.url : '/posts/' + post.id.to_s %>" ><%= post.title %></a></td>
 
-                  <td><%= post.text %></td>
-                  <td><a class="estiloLink" href="/users/<%= post.user_id %>"><%= post.user_name %></a></td>
                   <td><%= distance_of_time_in_words(Time.now, post.created_at) %></td>
 
                     <% if logged_in? && current_user.owns_post?(post) %>
                     <td><%= link_to 'Edit', edit_post_path(post), class: 'estiloLink' %></td>
-                    <td><%= link_to 'Destroy', post, method: :delete, data: {confirm: 'Are you sure?'} , class: 'estiloLink' %></td>
+                    <td><%= link_to 'Delete', post, method: :delete, data: {confirm: 'Are you sure?'} , class: 'estiloLink' %></td>
                   <%end%>
                   
                 </tr>
@@ -108,9 +111,9 @@
                   </td>
 
                 </tr>
-                <% i = i+1 %>
-              <% end %>
             </table>
+            <% i = i + 1 %>
+            <% end %>
           </td>
         </tr>
       </table>

@@ -34,14 +34,9 @@ class Post < ApplicationRecord
 
   def calc_hot_score
     points = upvotes - downvotes
+    update_attributes(points: points)
   end
 
-
-  def hot_score(points, time_ago_in_hours, gravity = 1.8)
-    # one is subtracted from available points because every link by default has one point
-    # There is no reason for picking 1.8 as gravity, just an arbitrary value
-    (points - 1) / (time_ago_in_hours + 2) ** gravity
-  end
   scope :hottest, -> { order(hot_score: :desc) }
   scope :newest, -> { order(created_at: :desc) }
   has_many :votes
