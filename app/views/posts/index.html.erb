@@ -93,7 +93,9 @@
                      </span>
                   <%#end%>-->
                   <span class="points">
+
                   <td><%= pluralize(post.points, 'point') %> by <a class="estiloLink" href="/users/<%= post.user_id %>"><%= post.user_name %></a></td>
+
                   </span>
                   <td> <a class="estiloLink" href="<%= post.url != "" ? post.url : '/posts/' + post.id.to_s %>" ><%= post.title %></a></td>
 
@@ -103,7 +105,7 @@
                     <td><%= link_to 'Edit', edit_post_path(post), class: 'estiloLink' %></td>
                     <td><%= link_to 'Delete', post, method: :delete, data: {confirm: 'Are you sure?'} , class: 'estiloLink' %></td>
                   <%end%>
-                  
+
                 </tr>
                 <tr>
                   <td>
