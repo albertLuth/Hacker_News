@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
-  get 'links/index'
+  get 'posts/index'
 
-  get 'links/new'
+  get 'posts/new'
 
-  get 'links/show'
-
-  get 'links/edit'
-
+  get 'posts/show'
+  get 'posts/edit'
   root 'posts#index'
 
   get '/newest', to: "posts#newest"
@@ -16,11 +14,13 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
-  resources :posts
+
   resources :users
-  resources :links, except: :index do
-  resources :comments, only: [:create, :edit, :update, :destroy]
-  post :upvote, on: :member
+
+
+  resources :posts, except: :index do
+    post :upvote, on: :member
+    post :downvote, on: :member
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

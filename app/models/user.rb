@@ -10,8 +10,27 @@ class User < ApplicationRecord
           user.save!
         end
       end
-
-      def upvote(link)
-        votes.create(upvote: 1, link: link)
+      def owns_post?(post)
+        self == post.user
       end
+
+      def upvote(post)
+        votes.create(upvote: 1, post: post)
+      end
+      def upvoted?(post)
+        votes.exists?(upvote: 1, post: post)
+      end
+
+      def remove_vote(post)
+        votes.find_by(post: post).destroy
+      end
+      def downvote(post)
+        votes.create(downvote: 1, post: post)
+      end
+
+      def downvoted?(post)
+        votes.exists?(downvote: 1, post: post)
+      end
+      has_many :posts, dependent: :destroy
+      has_many :votes
 end

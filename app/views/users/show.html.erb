@@ -71,6 +71,10 @@
                     <%= @user.email %>
                   </p>
                   <p>
+                    <strong>About:</strong>
+                    <%= @user.about %>
+                  </p>
+                  <p>
                       <% if current_user == @user %>
                           <%= link_to "Edit Profile", edit_user_path(current_user) %></td>
                       <%end%>
