@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :prevent_unauthorized_user_access, only: [:new, :edit]
+  before_action :prevent_unauthorized_user_access, except: [:show, :index]
   # GET /posts
   # GET /posts.json
   def index
@@ -21,6 +22,35 @@ class PostsController < ApplicationController
     render "posts/index"
   end
 
+  def upvote
+    post = Post.find_by(id: params[:id])
+
+    if current_user.upvoted?(post)
+      current_user.remove_vote(post)
+    elsif current_user.downvoted?(post)
+      current_user.remove_vote(post)
+      current_user.upvote(post)
+    else
+      current_user.upvote(post)
+    end
+    post.calc_hot_score
+    redirect_to root_path
+  end
+  def downvote
+    post = Post.find_by(id: params[:id])
+
+    if current_user.downvoted?(post)
+      current_user.remove_vote(post)
+    elsif current_user.upvoted?(post)
+      current_user.remove_vote(post)
+      current_user.downvote(post)
+    else
+      current_user.downvote(post)
+      redirect_to root_path
+    end
+    post.calc_hot_score
+    redirect_to root_path
+  end
   # GET /posts/1
   # GET /posts/1.json
   def show

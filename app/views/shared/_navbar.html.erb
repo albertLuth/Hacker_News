@@ -1,0 +1,19 @@
+<header>
+  <nav>
+    <%= link_to "jump news", "#", class: "logo" %>
+    <div class="navposts">
+      <%= link_to "new", newest_posts_path %>
+      <%= link_to "comments", "#" %>
+
+      <% unless logged_in? %>
+        <%= link_to "signup", new_user_path %>
+        <%= link_to "login", new_session_path %>
+      <% end %>
+
+      <% if logged_in? %>
+        <%= link_to "submit a post", "#" %>
+        <%= link_to "logout", sessions_path, method: :delete %>
+      <% end %>
+    </div>
+  </nav>
+</header>
