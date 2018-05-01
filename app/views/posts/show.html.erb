@@ -125,7 +125,27 @@
         <div style="margin-left:10px">
           <table>
             <tr>
-
+              <% if logged_in? && current_user.upvoted_comment?(comment) %>
+                <span class="upvote-comment">
+                <td><%= link_to "unvote(upvote)", upvote_comment_path(comment), method: :post %></td>
+              </span>
+                <%elsif  logged_in? && !current_user.upvoted_comment?(comment)%>
+                  <span class="upvote-comment">
+                  <td><%= link_to "upvote",upvote_comment_path(comment), method: :post %></td>
+                  </span>
+              <%end%>
+              <% if logged_in? && current_user.downvoted_comment?(comment) %>
+                <span class="downvote-comment">
+                <td><%= link_to "unvote(downvote)", downvote_comment_path(comment), method: :post %></td>
+                </span>
+                <%elsif  logged_in? && !current_user.downvoted_comment?(comment)%>
+                  <span class="downvote-comment">
+                  <td><%= link_to "downvote", downvote_comment_path(comment), method: :post %></td>
+                  </span>
+              <%end%>
+              <span class="points">
+              <td><%= pluralize(comment.points, 'point') %> by <%= comment.user.name%></td>
+              </span>
               <td><a class="estiloLink" href="/users/<%= comment.user.id %>"><%= comment.user.name %></a>
 
                 <%= distance_of_time_in_words(Time.now, comment.created_at) %>

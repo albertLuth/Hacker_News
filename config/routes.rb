@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   get 'posts/index'
 
   get 'posts/new'
-
   get 'posts/show'
   get 'posts/edit'
   root 'posts#index'
@@ -18,7 +17,11 @@ Rails.application.routes.draw do
   # post '/comments', to: 'comments#create'
 
   resources :users
-  resources :comments
+  resources :comments, except: :index do
+    post :upvote, on: :member
+    post :downvote, on: :member
+  end
+
   resources :replies
   resources :posts, except: :index do
     post :upvote, on: :member
