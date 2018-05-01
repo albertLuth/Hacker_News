@@ -31,6 +31,25 @@ class User < ApplicationRecord
       def downvoted?(post)
         votes.exists?(downvote: 1, post: post)
       end
+
+      def upvote_comment(comment)
+        comment_votes.create(upvote: 1, comment: comment)
+      end
+      def upvoted_comment?(comment)
+        comment_votes.exists?(upvote: 1, comment: comment)
+      end
+
+      def remove_comment_vote(comment)
+        comment_votes.find_by(comment: comment).destroy
+      end
+      def downvote_comment(comment)
+        comment_votes.create(downvote: 1, comment: comment)
+      end
+
+      def downvoted_comment?(comment)
+        comment_votes.exists?(downvote: 1, comment: comment)
+      end
       has_many :posts, dependent: :destroy
       has_many :votes
+      has_many :comment_votes
 end
