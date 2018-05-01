@@ -15,13 +15,16 @@ Rails.application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
 
+  # post '/comments', to: 'comments#create'
+
   resources :users
-
-
+  resources :comments
+  resources :replies
   resources :posts, except: :index do
     post :upvote, on: :member
     post :downvote, on: :member
   end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
