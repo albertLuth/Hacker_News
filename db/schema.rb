@@ -10,9 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20180501210520) do
 
+<<<<<<< HEAD
+=======
+ActiveRecord::Schema.define(version: 20180501210520) do
+
+>>>>>>> master
   create_table "comment_votes", force: :cascade do |t|
     t.integer "user_id"
     t.integer "comment_id"
