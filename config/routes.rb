@@ -22,7 +22,10 @@ Rails.application.routes.draw do
     post :downvote, on: :member
   end
 
-  resources :replies
+  resources :replies, except: :index do
+    post :upvote, on: :member
+    post :downvote, on: :member
+  end
   resources :posts, except: :index do
     post :upvote, on: :member
     post :downvote, on: :member

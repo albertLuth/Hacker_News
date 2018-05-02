@@ -17,7 +17,35 @@ class RepliesController < ApplicationController
   def new
     @reply = Reply.new
   end
+  def upvote
+    reply = Reply.find_by(id: params[:id])
 
+    if current_user.upvoted_reply?(reply)
+      current_user.remove_reply_vote(reply)
+    elsif current_user.downvoted_reply?(reply)
+      current_user.remove_reply_vote(reply)
+      current_user.upvote_reply(reply)
+    else
+      current_user.upvote_reply(reply)
+    end
+    reply.calc_hot_score
+    redirect_back(fallback_location: root_path)
+  end
+
+  def downvote
+    reply = Reply.find_by(id: params[:id])
+
+    if current_user.downvoted_reply?(reply)
+      current_user.remove_reply_vote(reply)
+    elsif current_user.upvoted_reply?(reply)
+      current_user.remove_reply_vote(reply)
+      current_user.downvote_reply(reply)
+    else
+      current_user.downvote_reply(reply)
+    end
+    reply.calc_hot_score
+    redirect_back(fallback_location: root_path)
+  end
   # GET /replies/1/edit
   def edit
   end
@@ -70,6 +98,6 @@ class RepliesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reply_params
-      params.require(:reply).permit(:content, :user_id, :comment_id)
+      params.require(:reply).permit(:content, :user_id, :comment_id, :points)
     end
 end

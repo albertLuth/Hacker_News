@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501210520) do
+ActiveRecord::Schema.define(version: 20180502183014) do
 
   create_table "comment_votes", force: :cascade do |t|
     t.integer "user_id"
@@ -55,8 +55,20 @@ ActiveRecord::Schema.define(version: 20180501210520) do
     t.integer "comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "points"
     t.index ["comment_id"], name: "index_replies_on_comment_id"
     t.index ["user_id"], name: "index_replies_on_user_id"
+  end
+
+  create_table "reply_votes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "reply_id"
+    t.integer "upvote"
+    t.integer "downvote"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reply_id"], name: "index_reply_votes_on_reply_id"
+    t.index ["user_id"], name: "index_reply_votes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
