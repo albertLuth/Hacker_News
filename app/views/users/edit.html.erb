@@ -80,8 +80,9 @@
     }
 
     .title {
+      margin-left: 20px;
       font-family: Verdana, Geneva, sans-serif;
-      font-size: 10pt;
+      font-size: 15pt;
       color: #828282;
     }
 
@@ -222,6 +223,8 @@
     <tr style="height:10px"></tr>
     <tr>
       <td>
+        <div class="title">Edit Profile</div>
+        <br>
         <div style="margin-left:20px">
           <%= render 'form', user: @user %>
         </div>
