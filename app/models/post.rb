@@ -12,7 +12,8 @@ class Post < ApplicationRecord
 
   validates :url,
             format: { with: %r{\Ahttps?://} },
-            allow_blank: true
+            allow_blank: true,
+            uniqueness: { case_sensitive: false }
 
   validate :text_xor_url
 
