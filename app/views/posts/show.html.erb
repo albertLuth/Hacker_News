@@ -125,22 +125,15 @@
         <div style="margin-left:10px">
           <table>
             <tr>
-              <% if logged_in? && current_user.upvoted_comment?(comment) %>
+              <% if logged_in? && current_user.upvoted_comment?(comment)  && current_user.id != comment.user_id%>
                 <span class="upvote-comment">
-                <td><%= link_to "unvote(upvote)", upvote_comment_path(comment), method: :post %></td>
-              </span>
-                <%elsif  logged_in? && !current_user.upvoted_comment?(comment)%>
-                  <span class="upvote-comment">
-                  <td><%= link_to "upvote",upvote_comment_path(comment), method: :post %></td>
-                  </span>
-              <%end%>
-              <% if logged_in? && current_user.downvoted_comment?(comment) %>
-                <span class="downvote-comment">
-                <td><%= link_to "unvote(downvote)", downvote_comment_path(comment), method: :post %></td>
+                <td><%= link_to image_tag("arrow_down.png", border:
+                                          0), upvote_comment_path(comment), class: 'estiloLink' , method: :post %></td>
                 </span>
-                <%elsif  logged_in? && !current_user.downvoted_comment?(comment)%>
-                  <span class="downvote-comment">
-                  <td><%= link_to "downvote", downvote_comment_path(comment), method: :post %></td>
+                <%elsif  logged_in? && !current_user.upvoted_comment?(comment)  && current_user.id != comment.user_id%>
+                  <span class="upvote-comment">
+                  <td><%= link_to image_tag("arrow_up.png", border:
+                      0), upvote_comment_path(comment), class: 'estiloLink' , method: :post %></td>
                   </span>
               <%end%>
               <span class="points">
@@ -167,7 +160,20 @@
             <div style="color:grey;margin-left:25px">
               <table>
                 <tr>
-
+                  <% if logged_in? && current_user.upvoted_reply?(reply)  && current_user.id != reply.user_id%>
+                    <span class="upvote-reply">
+                    <td><%= link_to image_tag("arrow_down.png", border:
+                                              0), upvote_reply_path(reply), class: 'estiloLink' , method: :post %></td>
+                    </span>
+                    <%elsif  logged_in? && !current_user.upvoted_reply?(reply)  && current_user.id != reply.user_id%>
+                      <span class="upvote-reply">
+                      <td><%= link_to image_tag("arrow_up.png", border:
+                          0), upvote_reply_path(reply), class: 'estiloLink' , method: :post %></td>
+                      </span>
+                  <%end%>
+                  <span class="points">
+                  <td><%= pluralize(reply.points, 'point') %> by <%= reply.user.name%></td>
+                  </span>
                   <td><a href="/users/<%= reply.user.id %>"><%= reply.user.name %></a>
 
                     <%= distance_of_time_in_words(Time.now, reply.created_at) %>
