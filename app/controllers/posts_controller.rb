@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :prevent_unauthorized_user_access, only: [:new, :edit]
-  before_action :prevent_unauthorized_user_access, except: [:show, :index]
+  before_action :prevent_unauthorized_user_access, except: [:show, :index, :newest, :ask]
   # GET /posts
   # GET /posts.json
   def index
