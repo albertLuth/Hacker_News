@@ -1,0 +1,747 @@
+/* line 6, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 10pt;
+  color: #828282;
+}
+
+/* line 7, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+td {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 10pt;
+  color: #828282;
+}
+
+/* line 10, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.admin td {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 8.5pt;
+  color: #000000;
+}
+
+/* line 11, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.subtext td {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 7pt;
+  color: #828282;
+}
+
+/* line 13, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+input {
+  font-family: monospace;
+  font-size: 10pt;
+}
+
+/* line 14, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+input[type=\"submit\"] {
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+/* line 15, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+textarea {
+  font-family: monospace;
+  font-size: 10pt;
+}
+
+/* line 17, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+#tipus:hover {
+  color: #000000;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+/* line 18, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.estiloCabecera:hover {
+  color: #000000;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+/* line 19, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.estiloLink:hover {
+  color: #000000;
+  text-decoration: underline;
+  background-color: transparent;
+}
+
+/* line 22, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+a:link {
+  color: #000000;
+  text-decoration: none;
+}
+
+/* line 23, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+a:visited {
+  color: #828282;
+  text-decoration: none;
+}
+
+/* line 24, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+a:hover {
+  background-color: transparent;
+}
+
+/* line 28, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.default {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 10pt;
+  color: #828282;
+}
+
+/* line 29, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.admin {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 8.5pt;
+  color: #000000;
+}
+
+/* line 30, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.title {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 10pt;
+  color: #828282;
+}
+
+/* line 31, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.subtext {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 7pt;
+  color: #828282;
+}
+
+/* line 32, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.yclinks {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 8pt;
+  color: #828282;
+}
+
+/* line 33, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.pagetop {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 10pt;
+  color: #222222;
+}
+
+/* line 34, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.comhead {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 8pt;
+  color: #828282;
+}
+
+/* line 35, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.comment {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 9pt;
+}
+
+/* line 36, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.hnname {
+  margin-right: 5px;
+}
+
+/* line 38, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.comment a:link, .comment a:visited {
+  text-decoration: underline;
+}
+
+/* line 39, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.noshow {
+  display: none;
+}
+
+/* line 40, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.nosee {
+  visibility: hidden;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* line 42, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.c00, .c00 a:link {
+  color: #000000;
+}
+
+/* line 43, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.c5a, .c5a a:link, .c5a a:visited {
+  color: #5a5a5a;
+}
+
+/* line 44, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.c73, .c73 a:link, .c73 a:visited {
+  color: #737373;
+}
+
+/* line 45, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.c82, .c82 a:link, .c82 a:visited {
+  color: #828282;
+}
+
+/* line 46, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.c88, .c88 a:link, .c88 a:visited {
+  color: #888888;
+}
+
+/* line 47, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.c9c, .c9c a:link, .c9c a:visited {
+  color: #9c9c9c;
+}
+
+/* line 48, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.cae, .cae a:link, .cae a:visited {
+  color: #aeaeae;
+}
+
+/* line 49, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.cbe, .cbe a:link, .cbe a:visited {
+  color: #bebebe;
+}
+
+/* line 50, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.cce, .cce a:link, .cce a:visited {
+  color: #cecece;
+}
+
+/* line 51, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.cdd, .cdd a:link, .cdd a:visited {
+  color: #dddddd;
+}
+
+/* line 53, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.pagetop a:visited {
+  color: #000000;
+}
+
+/* line 54, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.topsel a:link, .topsel a:visited {
+  color: #ffffff;
+}
+
+/* line 56, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.subtext a:link, .subtext a:visited {
+  color: #828282;
+}
+
+/* line 57, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.subtext a:hover {
+  text-decoration: underline;
+}
+
+/* line 59, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.comhead a:link, .subtext a:visited {
+  color: #828282;
+}
+
+/* line 60, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.comhead a:hover {
+  text-decoration: underline;
+}
+
+/* line 62, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.default p {
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+
+/* line 64, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.pagebreak {
+  page-break-before: always;
+}
+
+/* line 66, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+pre {
+  overflow: auto;
+  padding: 2px;
+}
+
+/* line 67, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+pre:hover {
+  overflow: auto;
+}
+
+/* line 69, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.votearrow {
+  width: 10px;
+  height: 10px;
+  border: 0px;
+  margin: 3px 2px 6px;
+  background: url("grayarrow.gif") no-repeat;
+}
+
+/* line 78, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.votelinks.nosee div.votearrow.rotate180 {
+  display: none;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+  /* line 83, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .votearrow {
+    background-size: 10px;
+    background-image: url("grayarrow2x.gif");
+  }
+}
+/* line 86, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.rotate180 {
+  -webkit-transform: rotate(180deg);
+  /* Chrome and other webkit browsers */
+  -moz-transform: rotate(180deg);
+  /* FF */
+  -o-transform: rotate(180deg);
+  /* Opera */
+  -ms-transform: rotate(180deg);
+  /* IE9 */
+  transform: rotate(180deg);
+  /* W3C complaint browsers */
+  /* IE8 and below */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, DX=0, DY=0, SizingMethod='auto expand')";
+}
+
+/* mobile device */
+@media only screen and (min-width: 300px) and (max-width: 750px) {
+  /* line 101, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  #hnmain {
+    width: 100%;
+  }
+
+  /* line 102, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    -webkit-text-size-adjust: none;
+  }
+
+  /* line 103, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  td {
+    height: inherit !important;
+  }
+
+  /* line 104, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .title, .comment {
+    font-size: inherit;
+  }
+
+  /* line 105, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  span.pagetop {
+    display: block;
+    margin: 3px 5px;
+    font-size: 12px;
+  }
+
+  /* line 106, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  span.pagetop b {
+    display: block;
+    font-size: 15px;
+  }
+
+  /* line 107, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  table.comment-tree .comment a {
+    display: inline-block;
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: top;
+  }
+
+  /* line 109, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='40'] {
+    width: 12px;
+  }
+
+  /* line 110, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='80'] {
+    width: 24px;
+  }
+
+  /* line 111, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='120'] {
+    width: 36px;
+  }
+
+  /* line 112, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='160'] {
+    width: 48px;
+  }
+
+  /* line 113, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='200'] {
+    width: 60px;
+  }
+
+  /* line 114, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='240'] {
+    width: 72px;
+  }
+
+  /* line 115, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='280'] {
+    width: 84px;
+  }
+
+  /* line 116, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='320'] {
+    width: 96px;
+  }
+
+  /* line 117, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='360'] {
+    width: 108px;
+  }
+
+  /* line 118, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='400'] {
+    width: 120px;
+  }
+
+  /* line 119, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='440'] {
+    width: 132px;
+  }
+
+  /* line 120, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='480'] {
+    width: 144px;
+  }
+
+  /* line 121, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='520'] {
+    width: 156px;
+  }
+
+  /* line 122, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='560'] {
+    width: 168px;
+  }
+
+  /* line 123, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='600'] {
+    width: 180px;
+  }
+
+  /* line 124, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='640'] {
+    width: 192px;
+  }
+
+  /* line 125, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='680'] {
+    width: 204px;
+  }
+
+  /* line 126, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='720'] {
+    width: 216px;
+  }
+
+  /* line 127, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='760'] {
+    width: 228px;
+  }
+
+  /* line 128, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='800'] {
+    width: 240px;
+  }
+
+  /* line 129, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  img[src='s.gif'][width='840'] {
+    width: 252px;
+  }
+
+  /* line 130, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .title {
+    font-size: 11pt;
+    line-height: 14pt;
+  }
+
+  /* line 131, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .subtext {
+    font-size: 9pt;
+  }
+
+  /* line 132, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .itemlist {
+    padding-right: 5px;
+  }
+
+  /* line 133, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .votearrow {
+    transform: scale(1.3, 1.3);
+    margin-right: 6px;
+  }
+
+  /* line 134, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .votearrow.rotate180 {
+    -webkit-transform: rotate(180deg) scale(1.3, 1.3);
+    /* Chrome and other webkit browsers */
+    -moz-transform: rotate(180deg) scale(1.3, 1.3);
+    /* FF */
+    -o-transform: rotate(180deg) scale(1.3, 1.3);
+    /* Opera */
+    -ms-transform: rotate(180deg) scale(1.3, 1.3);
+    /* IE9 */
+    transform: rotate(180deg) scale(1.3, 1.3);
+    /* W3C complaint browsers */
+  }
+
+  /* line 141, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .votelinks {
+    min-width: 18px;
+  }
+
+  /* line 142, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .votelinks a {
+    display: block;
+    margin-bottom: 9px;
+  }
+
+  /* line 143, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  input[type='text'], input[type='number'], textarea {
+    font-size: 16px;
+    width: 90%;
+  }
+}
+/* line 146, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+.comment {
+  max-width: 1215px;
+  overflow: auto;
+}
+
+/* line 147, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+pre {
+  max-width: 900px;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 389px) {
+  /* line 150, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .comment {
+    max-width: 270px;
+    overflow: auto;
+  }
+
+  /* line 151, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  pre {
+    max-width: 200px;
+  }
+}
+@media only screen and (min-width: 390px) and (max-width: 509px) {
+  /* line 154, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .comment {
+    max-width: 350px;
+    overflow: auto;
+  }
+
+  /* line 155, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  pre {
+    max-width: 260px;
+  }
+}
+@media only screen and (min-width: 510px) and (max-width: 599px) {
+  /* line 158, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .comment {
+    max-width: 460px;
+    overflow: auto;
+  }
+
+  /* line 159, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  pre {
+    max-width: 340px;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 689px) {
+  /* line 162, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .comment {
+    max-width: 540px;
+    overflow: auto;
+  }
+
+  /* line 163, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  pre {
+    max-width: 400px;
+  }
+}
+@media only screen and (min-width: 690px) and (max-width: 809px) {
+  /* line 166, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .comment {
+    max-width: 620px;
+    overflow: auto;
+  }
+
+  /* line 167, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  pre {
+    max-width: 460px;
+  }
+}
+@media only screen and (min-width: 810px) and (max-width: 899px) {
+  /* line 170, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .comment {
+    max-width: 730px;
+    overflow: auto;
+  }
+
+  /* line 171, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  pre {
+    max-width: 540px;
+  }
+}
+@media only screen and (min-width: 900px) and (max-width: 1079px) {
+  /* line 174, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .comment {
+    max-width: 810px;
+    overflow: auto;
+  }
+
+  /* line 175, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  pre {
+    max-width: 600px;
+  }
+}
+@media only screen and (min-width: 1080px) and (max-width: 1169px) {
+  /* line 178, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .comment {
+    max-width: 970px;
+    overflow: auto;
+  }
+
+  /* line 179, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  pre {
+    max-width: 720px;
+  }
+}
+@media only screen and (min-width: 1170px) and (max-width: 1259px) {
+  /* line 182, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .comment {
+    max-width: 1050px;
+    overflow: auto;
+  }
+
+  /* line 183, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  pre {
+    max-width: 780px;
+  }
+}
+@media only screen and (min-width: 1260px) and (max-width: 1349px) {
+  /* line 186, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  .comment {
+    max-width: 1130px;
+    overflow: auto;
+  }
+
+  /* line 187, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/posts.scss */
+  pre {
+    max-width: 840px;
+  }
+}
+/* line 1, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+body {
+  background-color: #fff;
+  color: #333;
+  margin: 33px;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 10, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 16, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/* line 22, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+a {
+  color: #000;
+}
+/* line 25, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+a:visited {
+  color: #666;
+}
+/* line 29, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+a:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+/* line 35, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+th {
+  padding-bottom: 5px;
+}
+
+/* line 39, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+td {
+  padding: 0 5px 7px;
+}
+
+/* line 44, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+/* line 49, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+#notice {
+  color: green;
+}
+
+/* line 53, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+/* line 59, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px 7px 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+/* line 66, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px -7px 0;
+  background-color: #c00;
+  color: #fff;
+}
+/* line 76, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+/* line 82, /home/albert/Documents/ASW/Hacker_News/app/assets/stylesheets/scaffolds.scss */
+label {
+  display: block;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";

@@ -1,3 +1,50 @@
+
+<style>
+
+  p, ol, ul, td {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+
+  th {
+    padding-bottom: 5px;
+  }
+
+  .field div, .actions div {
+    margin-bottom: 10px;
+  }
+
+  #error_explanation {
+    width: 450px;
+    border: 2px solid red;
+    padding: 7px 7px 0;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+  }
+
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px -7px 0;
+    background-color: #c00;
+    color: #fff;
+  }
+
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+
+
+  label {
+    display: block;
+  }
+</style>
+
 <%= form_with(model: user, local: true) do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
@@ -16,12 +63,25 @@
     <%= form.text_field :name, id: :user_name %>
   </div>
 
+  <br>
+
   <div class="field">
-    <%= form.label :password %>
-    <%= form.text_field :password, id: :user_password %>
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :user_email %>
   </div>
+
+  <br>
+
+  <div class="field">
+    <%= form.label :about %>
+    <%= form.text_field :about, id: :user_about %>
+  </div>
+
+  <br>
 
   <div class="actions">
     <%= form.submit %>
   </div>
+
+  <br>
 <% end %>

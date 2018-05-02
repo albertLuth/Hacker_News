@@ -1,0 +1,72 @@
+<style>
+
+  p, ol, ul, td {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+
+  th {
+    padding-bottom: 5px;
+  }
+
+  .field div, .actions div {
+    margin-bottom: 10px;
+  }
+
+  #error_explanation {
+    width: 450px;
+    border: 2px solid red;
+    padding: 7px 7px 0;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+  }
+
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px -7px 0;
+    background-color: #c00;
+    color: #fff;
+  }
+
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+
+
+  label {
+    display: block;
+  }
+</style>
+
+<%= form_with(model: reply, local: true) do |form| %>
+  <% if reply.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
+
+      <ul>
+      <% reply.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :reply_content %>
+  </div>
+
+  <br>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+  <br>
+<% end %>

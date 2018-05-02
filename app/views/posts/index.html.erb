@@ -13,40 +13,226 @@
     <link rel="stylesheet" type="text/scss" href="posts.scss">
     <link rel="shortcut icon" href="favicon.ico">
     <title>Hacker News</title>
+
+    <style>
+
+      body {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 10pt;
+        color: #828282;
+      }
+
+      td {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 10pt;
+        color: #828282;
+      }
+
+      .admin td {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 8.5pt;
+        color: #000000;
+      }
+
+      .subtext td {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 7pt;
+        color: #828282;
+      }
+
+      input {
+        font-family: monospace;
+        font-size: 10pt;
+      }
+
+      input[type=\"submit\"] {
+        font-family: Verdana, Geneva, sans-serif;
+      }
+
+      textarea {
+        font-family: monospace;
+        font-size: 10pt;
+      }
+
+      #hnmain {
+        border: #000000;
+        padding: 0;
+        border-spacing: 0;
+        border-collapse: separate;
+        width: 85%;
+        background-color: #f6f6ef;
+      }
+      #tableheader {
+        border: #000000;
+        padding:2px;
+        border-spacing: 0;
+        border-collapse: separate;
+        width: 100%;
+      }
+
+      #linkselected {
+        color: #ffffff;
+      }
+
+
+      a:link {
+        color: #000000;
+        text-decoration: none;
+      }
+
+      a:visited {
+        color: #828282;
+        text-decoration: none;
+      }
+
+      a:hover {
+        background-color: transparent
+      }
+
+
+      .title {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 10pt;
+        color: #828282;
+      }
+
+      .subtext {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 7pt;
+        color: #828282;
+      }
+
+      .pagetop {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 10pt;
+        color: #222222;
+      }
+
+      .comhead {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 8pt;
+        color: #828282;
+      }
+
+      .comment {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 9pt;
+        color: #000000;
+      }
+
+      .hnname {
+        margin-right: 5px;
+      }
+
+      .comment a:link, .comment a:visited {
+        text-decoration: underline;
+      }
+
+      .noshow {
+        display: none;
+      }
+
+      .nosee {
+        visibility: hidden;
+        pointer-events: none;
+        cursor: default
+      }
+
+      .pagetop a:visited {
+        color: #000000;
+      }
+
+      .subtext a:link, .subtext a:visited {
+        color: #828282;
+      }
+
+      .subtext a:hover {
+        text-decoration: underline;
+      }
+
+      .comhead a:link, .subtext a:visited {
+        color: #828282;
+      }
+
+      .comhead a:hover {
+        text-decoration: underline;
+      }
+
+      .default p {
+        margin-top: 8px;
+        margin-bottom: 0px;
+      }
+
+      pre {
+        overflow: auto;
+        padding: 2px;
+      }
+
+      pre:hover {
+        overflow: auto
+      }
+
+      .rotate180 {
+        -webkit-transform: rotate(180deg); /* Chrome and other webkit browsers */
+        -moz-transform: rotate(180deg); /* FF */
+        -o-transform: rotate(180deg); /* Opera */
+        -ms-transform: rotate(180deg); /* IE9 */
+        transform: rotate(180deg); /* W3C complaint browsers */
+
+        /* IE8 and below */
+        -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, DX=0, DY=0, SizingMethod='auto expand')";
+      }
+
+    </style>
   </head>
 
   <body>
     <center>
-      <table id="hnmain" border="0" cellpadding="0" cellspacing="0" width="85%" bgcolor="#f6f6ef">
+      <table id="hnmain" >
         <tr>
-          <td bgcolor="#ff6600">
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:2px">
+          <td style="background-color: #ff6600">
+            <table id="tableheader">
               <tr>
                 <td style="width:18px;padding-right:4px">
-                  <a>
-                  <img src="https://news.ycombinator.com/y18.gif" width="18" height="18" style="border:1px white solid;">
+                  <a href="/">
+                  <img src="https://news.ycombinator.com/y18.gif" width="18" height="18" style="border:1px white solid; background-color: transparent">
                   </a>
                 </td>
 
                 <td style="line-height:12pt; height:10px;">
                   <span class="pagetop">
                     <b class="hnname">
-                      <a href="news">Hacker News</a>
+                      <a href="/">Hacker News</a>
                     </b>
-                    <a href="/newest">new</a>
-                    <a href="/ask">ask</a>
-                    <a href="/posts/new">submit</a>
+                    <% if @s == 'new' %>
+                      <a id="linkselected" href="/newest">new</a> |
+                    <% else %>
+                    <a href="/newest">new</a> |
+                    <% end %>
+                    <%if current_user %> <a href="/threads">threads</a> | <% end %>
+                    <% if @s == 'ask' %>
+                      <a id="linkselected" href="/ask">ask</a> |
+                    <% else %>
+                      <a href="/ask">ask</a> |
+                    <% end %>
+                    <% if current_user %>
+                      <a href="/posts/new">submit</a>
+                    <% else %>
+                      <%= link_to "submit", "/auth/google_oauth2", id: "sign_in" %>
+                    <% end %>
                   </span>
                 </td>
 
                 <td style="text-align:right;padding-right:4px;">
                   <span class="pagetop">
-                      <% if current_user %>
-                        <%= current_user.name %> | 
-                        <%= link_to "logout", signout_path, id: "sign_out" %>
-                      <% else %>
-                        <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
-                      <% end %>
+                    <% if current_user %>
+
+                      <a href="/users/<%= current_user.id %>"><%= current_user.name %></a> |
+                      <%= link_to "logout", signout_path, id: "sign_out" %>
+
+                    <% else %>
+                      <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
+                    <% end %>
                   </span>
                 </td>
               </tr>
@@ -56,24 +242,67 @@
 
         <tr>
           <td>
+            <% i=1 %>
+            <% @posts.each do |post| %>
             <table>
-              <% i=1 %>
-              <% @posts.each do |post| %>
-                <tr>
-                  <td><font color="grey" size="3"><%= i %>.</font></td>
-                  <td><%= post.points %></td>
-                  <td> <i class="mdi-action-favorite red-text text-lighten-1"></i> <a href="#" onclick="AddValue()">0</a> </td>
-                  <td> <a href="<%= post.url != "" ? post.url : '/posts/' + post.id.to_s %>" ><%= post.title %></a></td>
-                  <td><%= post.text %></td>
-                  <td><%= post.user_id %></td>
-                  <td><%= distance_of_time_in_words(Time.now, post.created_at) %></td>
-                  <td><%= link_to 'Show', post %></td>
-                  <td><%= link_to 'Edit', edit_post_path(post) %></td>
-                  <td><%= link_to 'Destroy', post, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-                </tr>
-                <% i = i+1 %>
-              <% end %>
+              <tr>
+                <td><span style="color:grey; " ><%= i %>.</span></td>
+
+                <% if logged_in? && current_user.upvoted?(post) && current_user.id != post.user_id%>
+                  <span class="upvote-post">
+                  <td><%= link_to image_tag("arrow_down.png", border: 0, width: 10), upvote_post_path(post), method: :post %></td>
+                  </span>
+                  <%elsif  logged_in? && !current_user.upvoted?(post) && current_user.id != post.user_id%>
+                    <span class="upvote-post">
+                    <td><%= link_to image_tag("arrow_up.png", border:
+                        0, width: 10), upvote_post_path(post), method: :post %></td>
+                    </span>
+                <%end%>
+                <!--
+                <%#if logged_in? && current_user.downvoted?(post) %>
+                 <span class="downvote-post">
+                 <td><%#= link_to image_tag("arrow_down.png", border:
+                     0, width: 10), downvote_post_path(post), class: 'estiloLink' , method: :post %></td>
+                  </span>
+                  <%#elsif  logged_in? && !current_user.downvoted?(post)%>
+                    <span class="downvote-post">
+                   <td><%#= link_to image_tag("arrow_down.png", border:
+                        0, width: 10), downvote_post_path(post), class: 'estiloLink' , method: :post %></td>-
+                   </span>
+                <%#end%>-->
+
+                <td> <a href="<%= post.url != "" ? post.url : '/posts/' + post.id.to_s %>" ><%= post.title %></a></td>
+              </tr>
             </table>
+            <table>
+              <tr class="subtext">
+
+                <td ><%= pluralize(post.points, 'point') %> by <a href="/users/<%= post.user_id %>"><%= post.user_name %></a></td>
+
+                <td>&nbsp;</td>
+
+                <td><a href="/posts/<%= post.id %>"><%= distance_of_time_in_words(Time.now, post.created_at) %></a></td>
+
+                <td>&nbsp;|&nbsp;</td>
+
+                <td>
+                  <a href="/posts/<%= post.id %>"><%= Comment.where('post_id = ?', post.id).length %>
+                    comments</a>
+                </td>
+
+                  <% if logged_in? && current_user.owns_post?(post) %>
+                      <td>&nbsp;|&nbsp;</td>
+                  <td><%= link_to 'Edit', edit_post_path(post), class: 'subtext' %></td>
+
+                  <td>&nbsp;|&nbsp;</td>
+
+                  <td><%= link_to 'Delete', post, method: :delete, data: {confirm: 'Are you sure?'} , class: 'subtext' %></td>
+                  <%end%>
+              </tr>
+              <tr style="height:10px"></tr>
+            </table>
+            <% i = i + 1 %>
+            <% end %>
           </td>
         </tr>
       </table>

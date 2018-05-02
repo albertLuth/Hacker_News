@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :prevent_unauthorized_user_access, only: [:new, :edit]
+  before_action :prevent_unauthorized_user_access, except: [:show, :index]
   # GET /posts
   # GET /posts.json
   def index
@@ -11,6 +12,8 @@ class PostsController < ApplicationController
   # GET /newest.json
   def newest
     @posts = Post.all.order('created_at DESC')
+    @s = 'new'
+    @s.class # String
     render "posts/index"
   end
 
@@ -18,16 +21,43 @@ class PostsController < ApplicationController
   # GET /ask.json
   def ask
     @posts = Post.all.where(url: '').order('created_at DESC')
+    @s = 'ask'
+    @s.class # String
     render "posts/index"
   end
 
- def newest
-    @posts = Post.all
- end
+  def upvote
+    post = Post.find_by(id: params[:id])
 
+    if current_user.upvoted?(post)
+      current_user.remove_vote(post)
+    elsif current_user.downvoted?(post)
+      current_user.remove_vote(post)
+      current_user.upvote(post)
+    else
+      current_user.upvote(post)
+    end
+    post.calc_hot_score
+    redirect_back(fallback_location: root_path)
+  end
+  def downvote
+    post = Post.find_by(id: params[:id])
+
+    if current_user.downvoted?(post)
+      current_user.remove_vote(post)
+    elsif current_user.upvoted?(post)
+      current_user.remove_vote(post)
+      current_user.downvote(post)
+    else
+      current_user.downvote(post)
+    end
+    post.calc_hot_score
+    redirect_back(fallback_location: root_path)
+  end
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @comments = Comment.where("post_id=" + (params[:id])).order("created_at DESC")
   end
 
   # GET /posts/new
@@ -43,7 +73,9 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-
+    @post.user_id = session[:user_id]
+    @post.user_name = session[:user_name]
+    @post.points = 0
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -74,7 +106,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to action: "index", notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
