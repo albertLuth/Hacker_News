@@ -69,6 +69,12 @@ class PostsController < ApplicationController
   def edit
   end
 
+  def threads
+    @comments = Comment.where("user_id=" + session[:user_id].to_s)
+    @misreplies = Reply.where("user_id=" + session[:user_id].to_s)
+    render "posts/thread"
+  end
+
   # POST /posts
   # POST /posts.json
   def create

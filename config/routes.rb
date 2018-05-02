@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'thread/new'
+
+  get 'thread/create'
+
   get 'posts/index'
 
   get 'posts/new'
@@ -12,6 +16,8 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
+
+  get '/threads', to: "posts#threads"
 
 
   # post '/comments', to: 'comments#create'
