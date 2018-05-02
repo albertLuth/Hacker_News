@@ -324,7 +324,6 @@
         <div style="margin-left:20px">
           <table>
             <tr>
-<<<<<<< HEAD
               <td class="subtext">
                 <% if logged_in? && current_user.upvoted_comment?(comment) && current_user.id != comment.user_id %>
                   <%= link_to image_tag("arrow_down.png", border: 0, width: 10), upvote_comment_path(comment), method: :post %>
