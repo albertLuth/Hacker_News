@@ -34,46 +34,230 @@
   <link rel="stylesheet" type="text/scss" href="posts.scss">
   <link rel="shortcut icon" href="favicon.ico">
   <title><%= @post.title %> | Hacker News</title>
+  <style>
+
+    body {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 10pt;
+      color: #828282;
+    }
+
+    td {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 10pt;
+      color: #828282;
+    }
+
+    .admin td {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 8.5pt;
+      color: #000000;
+    }
+
+    .subtext td {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 7pt;
+      color: #828282;
+    }
+
+    input {
+      font-family: monospace;
+      font-size: 10pt;
+    }
+
+    input[type=\"submit\"] {
+      font-family: Verdana, Geneva, sans-serif;
+    }
+
+    textarea {
+      font-family: monospace;
+      font-size: 10pt;
+    }
+
+    #hnmain {
+      border: #000000;
+      padding: 0;
+      border-spacing: 0;
+      border-collapse: separate;
+      width: 85%;
+      background-color: #f6f6ef;
+    }
+
+    #tableheader {
+      border: #000000;
+      padding: 2px;
+      border-spacing: 0;
+      border-collapse: separate;
+      width: 100%;
+    }
+
+    #linkselected {
+      color: #ffffff;
+    }
+
+    a:link {
+      color: #000000;
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: #828282;
+      text-decoration: none;
+    }
+
+    a:hover {
+      background-color: transparent
+    }
+
+    #reply:link {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 7pt;
+      color: #000000;
+      text-decoration: underline;
+    }
+
+    #reply:visited {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 7pt;
+      color: #828282;
+      text-decoration: underline;
+    }
+
+    .title {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 10pt;
+      color: #828282;
+    }
+
+    .subtext {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 7pt;
+      color: #828282;
+    }
+
+    .pagetop {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 10pt;
+      color: #222222;
+    }
+
+    .comhead {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 8pt;
+      color: #828282;
+    }
+
+    .comment {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 9pt;
+      color: #000000;
+    }
+
+    .hnname {
+      margin-right: 5px;
+    }
+
+    .comment a:link, .comment a:visited {
+      text-decoration: underline;
+    }
+
+    .noshow {
+      display: none;
+    }
+
+    .nosee {
+      visibility: hidden;
+      pointer-events: none;
+      cursor: default
+    }
+
+    .pagetop a:visited {
+      color: #000000;
+    }
+
+    .subtext a:link, .subtext a:visited {
+      color: #828282;
+    }
+
+    .subtext a:hover {
+      text-decoration: underline;
+    }
+
+    .comhead a:link, .subtext a:visited {
+      color: #828282;
+    }
+
+    .comhead a:hover {
+      text-decoration: underline;
+    }
+
+    .default p {
+      margin-top: 8px;
+      margin-bottom: 0px;
+    }
+
+    pre {
+      overflow: auto;
+      padding: 2px;
+    }
+
+    pre:hover {
+      overflow: auto
+    }
+
+    .rotate180 {
+      -webkit-transform: rotate(180deg); /* Chrome and other webkit browsers */
+      -moz-transform: rotate(180deg); /* FF */
+      -o-transform: rotate(180deg); /* Opera */
+      -ms-transform: rotate(180deg); /* IE9 */
+      transform: rotate(180deg); /* W3C complaint browsers */
+
+      /* IE8 and below */
+      -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, DX=0, DY=0, SizingMethod='auto expand')";
+    }
+  </style>
 </head>
 
 <body>
 <center>
-  <table id="hnmain" border="0" cellpadding="0" cellspacing="0" width="85%" bgcolor="#f6f6ef">
+  <table id="hnmain">
     <tr>
-      <td bgcolor="#ff6600">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:2px">
+      <td style="background-color: #ff6600">
+        <table id="tableheader">
           <tr>
             <td style="width:18px;padding-right:4px">
-              <a>
+              <a href="/">
                 <img src="https://news.ycombinator.com/y18.gif" width="18" height="18" style="border:1px white solid; background-color: transparent">
               </a>
             </td>
 
             <td style="line-height:12pt; height:10px;">
-                      <span class="pagetop">
-                        <b class="hnname">
-                          <a id="tipus" href="/">Hacker News</a>
-                        </b>
-                        <a id="tipus" href="/newest">new</a> |
-                        <% if current_user %> <a id="tipus" href="/threads">threads</a> | <% end %>
-                        <a id="tipus" href="/ask">ask</a> |
-                        <% if current_user %>
-                          <a id="tipus" href="/posts/new">submit</a>
-                        <% else %>
-                          <%= link_to "login", "/auth/google_oauth2", id: "sign_in", class: 'estiloCabecera' %>
-                        <% end %>
-                      </span>
+              <span class="pagetop">
+                <b class="hnname">
+                  <a href="/">Hacker News</a>
+                </b>
+                <a href="/newest">new</a> |
+                <% if current_user %> <a href="/threads">threads</a> | <% end %>
+                <a href="/ask">ask</a> |
+                <% if current_user %>
+                  <a href="/posts/new">submit</a>
+                <% else %>
+                  <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
+                <% end %>
+              </span>
             </td>
 
             <td style="text-align:right;padding-right:4px;">
-                      <span class="pagetop">
-                          <% if current_user %>
-                            <a id="tipus" href="/users/<%= current_user.id %>"><%= current_user.name %></a> |
-                          <%= link_to "logout", signout_path, id: "sign_out", class: 'estiloCabecera' %>
-                          <% else %>
-                            <%= link_to "login", "/auth/google_oauth2", id: "sign_in", class: 'estiloCabecera' %>
-                          <% end %>
-                      </span>
+              <span class="pagetop">
+                <% if current_user %>
+
+                  <a href="/users/<%= current_user.id %>"><%= current_user.name %></a> |
+                  <%= link_to "logout", signout_path, id: "sign_out" %>
+
+                <% else %>
+                  <%= link_to "login", "/auth/google_oauth2", id: "sign_in" %>
+                <% end %>
+              </span>
             </td>
           </tr>
         </table>
@@ -83,80 +267,99 @@
     <tr>
       <td>
 
-        <div>
-          <a id="tipus" href="/posts/<%= @post.id %>">
+        <div style="margin-left:20px">
+          <a href="/posts/<%= @post.id %>">
             <%= @post.title %>
           </a>
           <br>
-          submitted by <a  class="estiloLink" href="/users/<%= @post.user.id %>">
-          <%= @post.user.name %></a>
+          <span class="subtext">
+            <%= pluralize(@post.points, 'point') %> by <a href="/users/<%= @post.user.id %>">
+            <%= @post.user.name %></a>
+            |
+            <a href="/posts/<%= @post.id %>"><%= distance_of_time_in_words(Time.now, @post.created_at) %></a>
+            |
+            <a href="/posts/<%= @post.id %>"><%= Comment.where('post_id = ?', @post.id).length %>
+              comments</a>
+            <% if logged_in? && current_user.owns_post?(@post) %>
+              |
+              <%= link_to 'Edit', edit_post_path(@post) %>
+              |
+              <%= link_to 'Delete', @post, method: :delete, data: {confirm: 'Are you sure?'} %>
+            <% end %>
+          </span>
+
+          <p><%= @post.text %></p>
         </div>
 
         <div style="margin-left:20px">
-          <% if current_user %>
+          <% if logged_in? && !current_user.owns_post?(@post)  %>
             <form action="/comments" method="POST" id="comment_content_form">
 
-                <input type="hidden" name="comment[user_id]" value=<%= current_user.id %>>
-                <input type="hidden" name="comment[post_id]" value=<%= @post.id %>>
-                <textarea name="comment[content]" value="" form="comment_content_form" style="min-width:500px;min-height:100px"></textarea>
-                <br>
-                <input type="submit" value="add comment">
+              <input type="hidden" name="comment[user_id]" value=<%= current_user.id %>>
+              <input type="hidden" name="comment[post_id]" value=<%= @post.id %>>
+              <textarea name="comment[content]" value="" form="comment_content_form" style="min-width:500px;min-height:100px"></textarea>
+              <br>
+              <br>
+              <input type="submit" value="add comment">
             </form>
           <%end%>
-
-          <%#= form_for(@comment) do |f| %>
-
-            <%#= f.hidden_field :post_id, value: @post.id %>
-            <%#= f.hidden_field :user_id, value: current_user.id %>
-
-<!--            <div class="field">-->
-              <%#= f.label :content %>
-              <%#= f.text_area :content, id: :comment_content %>
-<!--            </div>-->
-
-<!--            <div class="actions">-->
-              <%#= f.submit %>
-<!--            </div>-->
-          <%# end %>
         </div>
+
+        <br>
+        <br>
 
         <%# @comments = Comment.where("post_id=?", @post.id).order("created_at DESC") %>
         <% @comments.each do |comment| %>
-        <div style="margin-left:10px">
+        <div style="margin-left:20px">
           <table>
             <tr>
 
-              <td><a class="estiloLink" href="/users/<%= comment.user.id %>"><%= comment.user.name %></a>
-
-                <%= distance_of_time_in_words(Time.now, comment.created_at) %>
-
+              <td class="subtext">
+                <a href="/users/<%= comment.user.id %>"><%= comment.user.name %></a>
+                <a href="/comments/<%= comment.id %>"><%= distance_of_time_in_words(Time.now, comment.created_at) %></a>
+                <% if logged_in? && current_user.id == comment.user_id  %>
+                  |
+                  <%= link_to 'Edit', edit_comment_path(comment) %>
+                  |
+                  <%= link_to 'Delete', comment, method: :delete, data: {confirm: 'Are you sure?'} %>
+                <%end%>
+              </td>
             </tr>
           </table>
           <table>
             <tr>
-              <td style="color:grey;"> <%= comment.content %></td>
+              <td style="color:black;"> <%= comment.content %></td>
             </tr>
           </table>
           <% if current_user %>
-            <a class="estiloLink" href="/comments/<%= comment.id %>">reply</a>
+            <a id="reply" href="/comments/<%= comment.id %>">reply</a>
           <%end%>
         </div>
 
           <% @replies = Reply.where("comment_id=?", comment.id).order("created_at DESC") %>
           <% @replies.each do |reply| %>
-            <div style="color:grey;margin-left:25px">
+            <div style="color:black;margin-left:60px">
               <table>
                 <tr>
 
-                  <td><a href="/users/<%= reply.user.id %>"><%= reply.user.name %></a>
+                  <td class="subtext">
+                    <a href="/users/<%= reply.user.id %>"><%= reply.user.name %></a>
 
                     <%= distance_of_time_in_words(Time.now, reply.created_at) %>
 
-                    </tr>
+                    <% if logged_in? && current_user.id == reply.user_id %>
+                      |
+                      <%= link_to 'Edit', edit_reply_path(reply) %>
+                      |
+                      <%= link_to 'Delete', reply, method: :delete, data: {confirm: 'Are you sure?'} %>
+                    <% end %>
+                  </td>
+
+                </tr>
               </table>
               <table>
                 <tr>
-                  <td> <%= reply.content %></td>
+                  <td style="color:black;"> <%= reply.content %></td>
                 </tr>
               </table>
             </div>

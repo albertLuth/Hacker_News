@@ -12,6 +12,8 @@ class PostsController < ApplicationController
   # GET /newest.json
   def newest
     @posts = Post.all.order('created_at DESC')
+    @s = 'new'
+    @s.class # String
     render "posts/index"
   end
 
@@ -19,6 +21,8 @@ class PostsController < ApplicationController
   # GET /ask.json
   def ask
     @posts = Post.all.where(url: '').order('created_at DESC')
+    @s = 'ask'
+    @s.class # String
     render "posts/index"
   end
 
