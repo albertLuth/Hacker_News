@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :prevent_unauthorized_user_access
+  before_action :prevent_unauthorized_user_access, except: [:show]
   # GET /users
   # GET /users.json
   def index
