@@ -38,7 +38,7 @@ class PostsController < ApplicationController
       current_user.upvote(post)
     end
     post.calc_hot_score
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
   end
   def downvote
     post = Post.find_by(id: params[:id])
@@ -50,10 +50,9 @@ class PostsController < ApplicationController
       current_user.downvote(post)
     else
       current_user.downvote(post)
-      redirect_to root_path
     end
     post.calc_hot_score
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
   end
   # GET /posts/1
   # GET /posts/1.json
@@ -107,7 +106,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to action: "index", notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

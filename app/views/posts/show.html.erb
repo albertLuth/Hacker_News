@@ -268,6 +268,16 @@
       <td>
 
         <div style="margin-left:20px">
+          <% if logged_in? && current_user.upvoted?(@post) && current_user.id != @post.user_id %>
+            <%= link_to image_tag("arrow_down.png", border: 0, width: 10), upvote_post_path(@post), method: :post %>
+          <% elsif logged_in? && !current_user.upvoted?(@post) && current_user.id != @post.user_id %>
+            <%= link_to image_tag("arrow_up.png", border:0, width: 10), upvote_post_path(@post), method: :post %>
+          <% end %>
+      <!--<%#if logged_in? && current_user.downvoted?(post) %>
+            <%#= link_to image_tag("arrow_down.png", border: 0, width: 10), downvote_post_path(post), class: 'estiloLink' , method: :post %>
+          <%#elsif  logged_in? && !current_user.downvoted?(post)%>
+            <%#= link_to image_tag("arrow_down.png", border: 0, width: 10), downvote_post_path(post), class: 'estiloLink' , method: :post %>
+          <%#end%>-->
           <a href="/posts/<%= @post.id %>">
             <%= @post.title %>
           </a>
@@ -292,7 +302,8 @@
         </div>
 
         <div style="margin-left:20px">
-          <% if logged_in? && !current_user.owns_post?(@post)  %>
+          <%# if logged_in? && !current_user.owns_post?(@post)  %>
+          <% if logged_in? %>
             <form action="/comments" method="POST" id="comment_content_form">
 
               <input type="hidden" name="comment[user_id]" value=<%= current_user.id %>>
@@ -313,8 +324,19 @@
         <div style="margin-left:20px">
           <table>
             <tr>
-
               <td class="subtext">
+                <% if logged_in? && current_user.upvoted_comment?(comment) && current_user.id != comment.user_id %>
+                  <%= link_to image_tag("arrow_down.png", border: 0, width: 10), upvote_comment_path(comment), method: :post %>
+                <%elsif  logged_in? && !current_user.upvoted_comment?(comment) && current_user.id != comment.user_id %>
+                  <%= link_to image_tag("arrow_up.png", border:
+                      0, width: 10),upvote_comment_path(comment), method: :post %>
+                <%end%>
+                <%# if logged_in? && current_user.downvoted_comment?(comment) %>
+                  <%#= link_to image_tag("arrow_down.png", border: 0, width: 10), downvote_comment_path(comment), method: :post %>
+                <%#elsif  logged_in? && !current_user.downvoted_comment?(comment)%>
+                  <%#= link_to image_tag("arrow_down.png", border: 0, width: 10), downvote_comment_path(comment), method: :post %>
+                <%#end%>
+                <%= pluralize(comment.points, 'point') %> by <%= comment.user.name%> by
                 <a href="/users/<%= comment.user.id %>"><%= comment.user.name %></a>
                 <a href="/comments/<%= comment.id %>"><%= distance_of_time_in_words(Time.now, comment.created_at) %></a>
                 <% if logged_in? && current_user.id == comment.user_id  %>

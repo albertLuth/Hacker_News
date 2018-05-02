@@ -18,7 +18,35 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.new
   end
+  def upvote
+    comment = Comment.find_by(id: params[:id])
 
+    if current_user.upvoted_comment?(comment)
+      current_user.remove_comment_vote(comment)
+    elsif current_user.downvoted_comment?(comment)
+      current_user.remove_comment_vote(comment)
+      current_user.upvote_comment(comment)
+    else
+      current_user.upvote_comment(comment)
+    end
+    comment.calc_hot_score
+    redirect_back(fallback_location: root_path)
+  end
+
+  def downvote
+    comment = Comment.find_by(id: params[:id])
+
+    if current_user.downvoted_comment?(comment)
+      current_user.remove_comment_vote(comment)
+    elsif current_user.upvoted_comment?(comment)
+      current_user.remove_comment_vote(comment)
+      current_user.downvote_comment(comment)
+    else
+      current_user.downvote_comment(comment)
+    end
+    comment.calc_hot_score
+    redirect_back(fallback_location: root_path)
+  end
   # GET /comments/1/edit
   def edit
   end
@@ -77,9 +105,10 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    @post = @comment.post
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to @post, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -92,6 +121,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:content, :user_id, :post_id)
+      params.require(:comment).permit(:content, :user_id, :post_id, :points)
     end
 end

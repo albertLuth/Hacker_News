@@ -246,28 +246,28 @@
             <% @posts.each do |post| %>
             <table>
               <tr>
-                <td><span style="color:grey" style="font-size: initial"><%= i %>.</span></td>
+                <td><span style="color:grey; " ><%= i %>.</span></td>
 
                 <% if logged_in? && current_user.upvoted?(post) && current_user.id != post.user_id%>
                   <span class="upvote-post">
-                  <td><%= link_to image_tag("arrow_down.png", border: 0), upvote_post_path(post), method: :post %></td>
+                  <td><%= link_to image_tag("arrow_down.png", border: 0, width: 10), upvote_post_path(post), method: :post %></td>
                   </span>
                   <%elsif  logged_in? && !current_user.upvoted?(post) && current_user.id != post.user_id%>
                     <span class="upvote-post">
                     <td><%= link_to image_tag("arrow_up.png", border:
-                        0), upvote_post_path(post), method: :post %></td>
+                        0, width: 10), upvote_post_path(post), method: :post %></td>
                     </span>
                 <%end%>
                 <!--
                 <%#if logged_in? && current_user.downvoted?(post) %>
                  <span class="downvote-post">
                  <td><%#= link_to image_tag("arrow_down.png", border:
-                     0), downvote_post_path(post), class: 'estiloLink' , method: :post %></td>
+                     0, width: 10), downvote_post_path(post), class: 'estiloLink' , method: :post %></td>
                   </span>
                   <%#elsif  logged_in? && !current_user.downvoted?(post)%>
                     <span class="downvote-post">
                    <td><%#= link_to image_tag("arrow_down.png", border:
-                        0), downvote_post_path(post), class: 'estiloLink' , method: :post %></td>-
+                        0, width: 10), downvote_post_path(post), class: 'estiloLink' , method: :post %></td>-
                    </span>
                 <%#end%>-->
 
@@ -298,8 +298,8 @@
 
                   <td><%= link_to 'Delete', post, method: :delete, data: {confirm: 'Are you sure?'} , class: 'subtext' %></td>
                   <%end%>
-
               </tr>
+              <tr style="height:10px"></tr>
             </table>
             <% i = i + 1 %>
             <% end %>

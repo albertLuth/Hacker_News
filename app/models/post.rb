@@ -37,7 +37,7 @@ class Post < ApplicationRecord
     update_attributes(points: points)
   end
 
-  scope :hottest, -> { order(hot_score: :desc) }
+  scope :hottest, -> { order(calc_hot_score: :desc) }
   scope :newest, -> { order(created_at: :desc) }
   has_many :votes
 end
