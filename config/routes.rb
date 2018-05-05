@@ -22,6 +22,10 @@ Rails.application.routes.draw do
 
   # post '/comments', to: 'comments#create'
 
+  Rails.application.routes.draw do  
+    mount API::Base, at: "/"
+  end
+
   resources :users
   resources :comments, except: :index do
     post :upvote, on: :member

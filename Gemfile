@@ -38,6 +38,11 @@ gem 'jbuilder', '~> 2.5'
 # Google authentication
 gem "omniauth-google-oauth2", "~> 0.2.1"
 
+# Grape is a REST-like API framework for Ruby
+gem "grape"
+gem 'grape-active_model_serializers'
+gem 'rack-cors', :require => 'rack/cors'
+
 group :development, :test do
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
