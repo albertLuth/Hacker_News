@@ -41,7 +41,6 @@ gem "omniauth-google-oauth2", "~> 0.2.1"
 # Grape is a REST-like API framework for Ruby
 gem "grape"
 gem 'grape-active_model_serializers'
-gem 'rack-cors', :require => 'rack/cors'
 
 group :development, :test do
   gem 'sqlite3'
