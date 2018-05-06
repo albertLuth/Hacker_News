@@ -1,5 +1,3 @@
-require 'digest/sha1'
-
 module API  
     module V1
       class Posts < Grape::API
@@ -13,7 +11,8 @@ module API
   
           desc "Return a post"
           params do
-            requires :id, type: String, desc: "ID of the post"
+            requires :id, type: String, desc: "ID of the 
+              post"
           end
           get ":id" do
             Post.where(id: permitted_params[:id]).first!
