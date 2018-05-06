@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 module API  
     module V1
       class Posts < Grape::API
@@ -24,6 +26,11 @@ module API
             requires :text, type: String 
           end
           post "add" do
+            #print "AAAA"
+            #print request.headers
+            #print request.headers["Token"]
+            #token = Digest::SHA256.hexdigest("some string")
+            #print token
             @post = Post.new(params)
             @post.user_id = 1
             @post.user_name = "Albert Masip"
