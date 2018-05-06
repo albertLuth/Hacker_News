@@ -26,16 +26,17 @@ module API
             requires :text, type: String 
           end
           post "add" do
-            #print "AAAA"
-            #print request.headers
-            #print request.headers["Token"]
-            #token = Digest::SHA256.hexdigest("some string")
-            #print token
-            @post = Post.new(params)
-            @post.user_id = 1
-            @post.user_name = "Albert Masip"
-            @post.points = 0
-            @post.save
+            token = request.headers["Token"]
+            user = User.where(uid: token).first
+            if user != nil
+              @post = Post.new(params)
+              @post.user_id = user.id
+              @post.user_name = user.name
+              @post.points = 0
+              @post.save
+            else 
+              error!('Unauthorized.', 401)
+            end
           end
         end
       end
