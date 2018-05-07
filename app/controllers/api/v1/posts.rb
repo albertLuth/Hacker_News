@@ -4,9 +4,19 @@ module API
       include API::V1::Defaults
 
       resource :posts do
-        desc "Return all posts"
+        desc "Return all posts with url sorted by points"
         get "", root: :posts do
-          Post.all
+          Post.all.where.not(url: '').order('points DESC')
+        end
+
+        desc "Return all posts sorted by date"
+        get "newest", root: :posts do
+          Post.all.order('created_at DESC')
+        end
+
+        desc "Return all questions sorted by date"
+        get "ask", root: :posts do
+          Post.all.where(url: '').order('created_at DESC')
         end
 
         desc "Return a post"
