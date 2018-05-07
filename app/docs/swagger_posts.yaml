@@ -1,0 +1,171 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Swagger HACKER NEWS"
+host: "asw-1199476051.herokuapp.com"
+basePath: "/api/v1"
+schemes:
+- "http"
+- "https"
+paths:
+  /posts:
+    get:
+      tags:
+      - "Posts"
+      summary: "Returns all posts with url sorted by points"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+  /posts/newest:
+    get:
+      tags:
+      - "Posts"
+      summary: "Returns all posts sorted by date"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+  /posts/ask:
+    get:
+      tags:
+      - "Posts"
+      summary: "Returns all questions sorted by date"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+  /posts/add:
+    post:
+      tags:
+      - "Posts"
+      summary: "Adds a new post"
+      description: ""
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "title"
+        in: "formData"
+        description: "Title of the post"
+        required: true
+        type: "string"
+        format: "int64"
+      - name: "url"
+        in: "formData"
+        description: "URL of the post"
+        required: false
+        type: "string"
+      - name: "text"
+        in: "formData"
+        description: "Text of the post"
+        required: false
+        type: "string"
+      - name: "Authentication"
+        in: "header"
+        description: "An authorization header"
+        required: true
+        type: string
+      responses:
+        200:
+          description: "successful operation"
+        405:
+          description: "Not Allowed"
+  /posts/{PostId}:
+    get:
+      tags:
+      - "Posts"
+      summary: "Returns a post"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "PostId"
+        in: "path"
+        description: "Post id to get"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        404:
+          description: "Not found"
+    delete:
+      tags:
+      - "Posts"
+      summary: "Deletes a post"
+      description: ""
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "PostId"
+        in: "path"
+        description: "Post id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "Authentication"
+        in: "header"
+        description: "An authorization header"
+        required: true
+        type: string
+      responses:
+        200:
+          description: "successful operation"
+        404:
+          description: "Not found"
+        405:
+          description: "Not Allowed"
+    put:
+      tags:
+      - "Posts"
+      summary: "Modifies a post"
+      description: ""
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "PostId"
+        in: "path"
+        description: "Post id to edit"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "title"
+        in: "formData"
+        description: "Title of the post"
+        required: true
+        type: "string"
+        format: "int64"
+      - name: "url"
+        in: "formData"
+        description: "URL of the post"
+        required: false
+        type: "string"
+      - name: "text"
+        in: "formData"
+        description: "Text of the post"
+        required: false
+        type: "string"
+      - name: "Authentication"
+        in: "header"
+        description: "An authorization header"
+        required: true
+        type: string
+      responses:
+        200:
+          description: "successful operation"
+        404:
+          description: "Not found"
+        405:
+          description: "Not Allowed"
