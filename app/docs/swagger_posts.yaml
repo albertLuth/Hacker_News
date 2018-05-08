@@ -102,6 +102,8 @@ paths:
       responses:
         200:
           description: "successful operation"
+        402:
+          description: "can't vote"
         404:
           description: "Not found"
 
