@@ -96,6 +96,8 @@ module API
                 @user.upvote(@post)
               end
               @post.calc_hot_score
+            else
+              error!('Unauthorized.', 402)
             end
           else
             error!('Unauthorized.', 401)
@@ -116,6 +118,8 @@ module API
                 @user.remove_vote(@post)
               end
               @post.calc_hot_score
+            else
+              error!('Denied AutoVote.',402)
             end
           else
             error!('Unauthorized.', 401)
