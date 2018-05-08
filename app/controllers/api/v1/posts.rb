@@ -1,4 +1,4 @@
-module API  
+module API
   module V1
     class Posts < Grape::API
       include API::V1::Defaults
@@ -21,7 +21,7 @@ module API
 
         desc "Return a post"
         params do
-          requires :id, type: String, desc: "ID of the 
+          requires :id, type: String, desc: "ID of the
             post"
         end
         get ":id" do
@@ -43,7 +43,7 @@ module API
             @post.user_name = user.name
             @post.points = 0
             @post.save
-          else 
+          else
             error!('Unauthorized.', 401)
           end
         end
@@ -58,7 +58,7 @@ module API
           @post = Post.where(id: permitted_params[:id]).first!
           if @user && @user.id == @post.user_id
             @post.destroy
-          else 
+          else
             error!('Unauthorized.', 401)
           end
         end
@@ -77,11 +77,52 @@ module API
             @post.url = params[:url] == nil ? '' : params[:url]
             @post.text = params[:text] == nil ? '':  params[:text]
             @post.save
-          else 
+          else
             error!('Unauthorized.', 401)
           end
         end
+
+        desc "Upvote a post"
+        params do
+          requires :id, type: String, desc: 'ID of the post'
+        end
+        post ":id/upvote" do
+          token = request.headers["Authentication"]
+          @user = User.where(uid: token).first
+          if @user != nil
+            @post = Post.where(id: permitted_params[:id]).first!
+            if @user.id != @post.user_id
+              if !@user.upvoted?(@post)
+                @user.upvote(@post)
+              end
+              @post.calc_hot_score
+            end
+          else
+            error!('Unauthorized.', 401)
+          end
+        end
+
+        desc "Downvote a post"
+        params do
+          requires :id, type: String, desc: 'ID of the post'
+        end
+        post ":id/downvote" do
+          token = request.headers["Authentication"]
+          @user = User.where(uid: token).first
+          if @user != nil
+            @post = Post.where(id: permitted_params[:id]).first!
+            if @user.id != @post.user_id
+              if @user.upvoted?(@post)
+                @user.remove_vote(@post)
+              end
+              @post.calc_hot_score
+            end
+          else
+            error!('Unauthorized.', 401)
+          end
+        end
+
       end
     end
   end
-end 
+end
