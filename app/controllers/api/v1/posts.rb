@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 module API  
     module V1
       class Posts < Grape::API
@@ -17,6 +18,8 @@ module API
           get ":id", root: "post" do
             Post.where(id: permitted_params[:id]).first!
 =======
+=======
+>>>>>>> master
 module API
   module V1
     class Posts < Grape::API
@@ -161,6 +164,7 @@ module API
             end
           else
             error!('Unauthorized.', 401)
+<<<<<<< HEAD
 >>>>>>> 58b5e700dd0f26334790f2495659ae967483830f
           end
 
@@ -176,6 +180,8 @@ module API
             @post.user_name = "Albert Masip"
             @post.points = 0
             @post.save
+=======
+>>>>>>> master
           end
         end
 

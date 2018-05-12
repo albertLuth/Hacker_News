@@ -12,6 +12,7 @@ module API
           Comment.where(id: permitted_params[:id]).first!
         end
 
+<<<<<<< HEAD
         desc "Return all comments from a post"
         params do
           requires :id, type: String, desc: "ID of the post"
@@ -20,6 +21,8 @@ module API
           Comment.all.where(post_id: permitted_params[:id]).order('points DESC')
         end
 
+=======
+>>>>>>> master
         desc "Create a new comment"
         params do
           requires :id, type: String, desc: "ID of the post"
