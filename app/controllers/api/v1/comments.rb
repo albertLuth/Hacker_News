@@ -16,7 +16,7 @@ module API
         params do
           requires :id, type: String, desc: "ID of the post"
         end
-        get "" do
+        get ":id" do
           Comment.all.where(post_id: permitted_params[:id]).order('points DESC')
         end
 

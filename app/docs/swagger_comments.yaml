@@ -8,7 +8,7 @@ schemes:
 - "http"
 - "https"
 paths:
-  /comments:
+  /comments/{PostId}:
     get:
       tags:
       - "Comments"
