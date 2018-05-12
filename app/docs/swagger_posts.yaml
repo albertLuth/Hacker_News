@@ -41,6 +41,26 @@ paths:
       responses:
         200:
           description: "successful operation"
+  /posts/{PostId}/comments:
+    get:
+      tags:
+      - "Posts"
+      summary: "Returns all comments from a post"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "PostID"
+        in: "formData"
+        description: "Id of the post"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        404:
+          description: "Post not found"
+
   /posts/add:
     post:
       tags:
