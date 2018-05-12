@@ -1,202 +1,179 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: "1.0.0"
-  title: "Swagger HACKER NEWS"
-host: "asw-1199476051.herokuapp.com"
-basePath: "/api/v1"
+  version: 1.0.0
+  title: Swagger HACKER NEWS
+host: asw-1199476051.herokuapp.com
+basePath: /api/v1
 schemes:
-- "http"
-- "https"
+  - http
+  - https
 paths:
-  /comments/{PostId}:
-    get:
-      tags:
-      - "Comments"
-      summary: "Returns all comments from a Post"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "PostId"
-      in: "path"
-      description: "Post id to get"
-      required: true
-      type: "integer"
-      format: "int64"
-      responses:
-        200:
-          description: "successful operation"
-
   /comments/add:
     post:
       tags:
-      - "Comments"
-      summary: "Adds a new comment"
-      description: ""
+        - Comments
+      summary: Adds a new comment
+      description: ''
       consumes:
-      - "multipart/form-data"
+        - multipart/form-data
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "content"
-        in: "formData"
-        description: "Content of the comment"
-        required: false
-        type: "string"
-        format: "int64"
-      - name: "post_id"
-        in: "formData"
-        description: "ID of the post"
-        required: true
-        type: "string"
-      - name: "Authentication"
-        in: "header"
-        description: "An authorization header"
-        required: true
-        type: string
+        - name: content
+          in: formData
+          description: Content of the comment
+          required: false
+          type: string
+          format: int64
+        - name: post_id
+          in: formData
+          description: ID of the post
+          required: true
+          type: string
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
       responses:
-        200:
-          description: "successful operation"
-        401:
-          description: "Unauthorized"
-        403:
-          description: "Forbidden"
-
-  /comment/{CommentId}:
+        '200':
+          description: successful operation
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/comments/{CommentId}':
     get:
       tags:
-      - "Comments"
-      summary: "Returns a comment"
+        - Comments
+      summary: Returns a comment
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "CommentId"
-        in: "path"
-        description: "Comment id to get"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: CommentId
+          in: path
+          description: Comment id to get
+          required: true
+          type: integer
+          format: int64
       responses:
-        200:
-          description: "successful operation"
-        404:
-          description: "Not found"
-
+        '200':
+          description: successful operation
+        '404':
+          description: Not found
     delete:
       tags:
-      - "Comments"
-      summary: "Deletes a comment"
-      description: ""
+        - Comments
+      summary: Deletes a comment
+      description: ''
       consumes:
-      - "multipart/form-data"
+        - multipart/form-data
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "CommentId"
-        in: "path"
-        description: "Comments id to delete"
-        required: true
-        type: "integer"
-        format: "int64"
-      - name: "Authentication"
-        in: "header"
-        description: "An authorization header"
-        required: true
-        type: string
+        - name: CommentId
+          in: path
+          description: Comments id to delete
+          required: true
+          type: integer
+          format: int64
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
       responses:
-        200:
-          description: "successful operation"
-        404:
-          description: "Not found"
-        401:
-          description: "Unauthorized"
-        403:
-          description: "Forbidden"
-
+        '200':
+          description: successful operation
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
     put:
       tags:
-      - "Comments"
-      summary: "Modifies a comment"
-      description: ""
+        - Comments
+      summary: Modifies a comment
+      description: ''
       consumes:
-      - "multipart/form-data"
+        - multipart/form-data
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "CommentId"
-        in: "path"
-        description: "Comment id to edit"
-        required: true
-        type: "integer"
-        format: "int64"
-      - name: "content"
-        in: "formData"
-        description: "Content of the comment"
-        required: true
-        type: "string"
-        format: "int64"
-      - name: "Authentication"
-        in: "header"
-        description: "An authorization header"
-        required: true
-        type: string
+        - name: CommentId
+          in: path
+          description: Comment id to edit
+          required: true
+          type: integer
+          format: int64
+        - name: content
+          in: formData
+          description: Content of the comment
+          required: true
+          type: string
+          format: int64
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
       responses:
-        200:
-          description: "successful operation"
-        404:
-          description: "Not found"
-        401:
-          description: "Unauthorized"
-        403:
-          description: "Forbidden"
-
-  /comments/{CommentId}/upvote:
+        '200':
+          description: successful operation
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  '/comments/{CommentId}/upvote':
     post:
       tags:
-      - "Comments"
-      summary: "Upvote a comment"
+        - Comments
+      summary: Upvote a comment
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "CommentId"
-        in: "path"
-        description: "Comment id to vote"
-        required: true
-        type: "integer"
-        format: "int64"
-      - name: "Authentication"
-        in: "header"
-        description: "An authorization header"
-        required: true
-        type: string
+        - name: CommentId
+          in: path
+          description: Comment id to vote
+          required: true
+          type: integer
+          format: int64
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
       responses:
-        200:
-          description: "successful operation"
-        402:
-          description: "can't vote"
-        404:
-          description: "Not found"
-
-  /comments/{CommentId}/downvote:
+        '200':
+          description: successful operation
+        '402':
+          description: can't vote
+        '404':
+          description: Not found
+  '/comments/{CommentId}/downvote':
     post:
       tags:
-      - "Comments"
-      summary: "Upvote a comment"
+        - Comments
+      summary: Upvote a comment
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - name: "CommentId"
-        in: "path"
-        description: "Comment id to unvote"
-        required: true
-        type: "integer"
-        format: "int64"
-      - name: "Authentication"
-        in: "header"
-        description: "An authorization header"
-        required: true
-        type: string
+        - name: CommentId
+          in: path
+          description: Comment id to unvote
+          required: true
+          type: integer
+          format: int64
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
       responses:
-        200:
-          description: "successful operation"
-        404:
-          description: "Not found"
+        '200':
+          description: successful operation
+        '404':
+          description: Not found
