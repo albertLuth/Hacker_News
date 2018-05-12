@@ -34,6 +34,9 @@ module API
         end
         post "add" do
           token = request.headers["Authentication"]
+          if token == nil
+            error!('Unauthorized.', 401)
+          end
           user = User.where(uid: token).first
           if user != nil
             @post = Post.new(params)
@@ -44,7 +47,7 @@ module API
             @post.points = 0
             @post.save
           else
-            error!('Unauthorized.', 401)
+            error!('Forbidden.', 403)
           end
         end
 
@@ -54,12 +57,15 @@ module API
         end
         delete ":id" do
           token = request.headers["Authentication"]
+          if token == nil
+            error!('Unauthorized.', 401)
+          end
           @user = User.where(uid: token).first
           @post = Post.where(id: permitted_params[:id]).first!
           if @user && @user.id == @post.user_id
             @post.destroy
           else
-            error!('Unauthorized.', 401)
+            error!('Forbidden.', 403)
           end
         end
 
@@ -70,6 +76,9 @@ module API
         end
         put ":id" do
           token = request.headers["Authentication"]
+          if token == nil
+            error!('Unauthorized.', 401)
+          end
           @user = User.where(uid: token).first
           @post = Post.where(id: permitted_params[:id]).first!
           if @user && @user.id == @post.user_id
@@ -78,7 +87,7 @@ module API
             @post.text = params[:text] == nil ? '':  params[:text]
             @post.save
           else
-            error!('Unauthorized.', 401)
+            error!('Forbidden.', 403)
           end
         end
 
@@ -97,7 +106,7 @@ module API
               end
               @post.calc_hot_score
             else
-              error!('Unauthorized.', 402)
+              error!('Unauthorized.', 401)
             end
           else
             error!('Unauthorized.', 401)
@@ -119,7 +128,7 @@ module API
               end
               @post.calc_hot_score
             else
-              error!('Denied AutoVote.',402)
+              error!('Denied AutoVote.',401)
             end
           else
             error!('Unauthorized.', 401)

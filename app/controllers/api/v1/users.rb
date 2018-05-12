@@ -15,6 +15,9 @@ module API
           desc "Edit a user"
           put "" do
             token = request.headers["Authentication"]
+            if token == nil
+              error!('Unauthorized.', 401)
+            end
             @user = User.where(uid: token).first
             if @user
               @user.name = params[:name] == nil ? @user.name : params[:name]
@@ -22,7 +25,7 @@ module API
               @user.about = params[:about] == nil ? @user.about :  params[:about]
               @user.save
             else 
-              error!('Unauthorized.', 401)
+              error!('Forbidden.', 403)
             end
           end
         end
