@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-module API  
-    module V1
-      class Posts < Grape::API
-        include API::V1::Defaults
-  
-        resource :posts do
-          desc "Return all posts"
-          get "", root: :posts do
-            Post.all
-          end
-  
-          desc "Return a post"
-          params do
-            requires :id, type: String, desc: "ID of the post"
-          end
-          get ":id", root: "post" do
-            Post.where(id: permitted_params[:id]).first!
-=======
-=======
->>>>>>> master
 module API
   module V1
     class Posts < Grape::API
@@ -164,24 +142,6 @@ module API
             end
           else
             error!('Unauthorized.', 401)
-<<<<<<< HEAD
->>>>>>> 58b5e700dd0f26334790f2495659ae967483830f
-          end
-
-          desc "Create a new post"
-          params do
-            requires :title, type: String
-            requires :url, type: String
-            requires :text, type: String 
-          end
-          post "add" do
-            @post = Post.new(params)
-            @post.user_id = 1
-            @post.user_name = "Albert Masip"
-            @post.points = 0
-            @post.save
-=======
->>>>>>> master
           end
         end
 
