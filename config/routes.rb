@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   Rails.application.routes.draw do  
     mount API::Base, at: "/"
   end
+  
 
   resources :users
   resources :comments, except: :index do
