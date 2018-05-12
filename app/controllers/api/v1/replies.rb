@@ -30,7 +30,7 @@ module API
       params do
         requires :id, type: String, desc: 'ID of the comment'
       end
-      reply "add" do
+      post "add" do
         token = request.headers["Authentication"]
         if token == nil
           error!('Unauthorized.', 401)
@@ -70,7 +70,7 @@ module API
       params do
         requires :id, type: String, desc: 'ID of the reply'
       end
-      reply ":id/upvote" do
+      post ":id/upvote" do
         token = request.headers["Authentication"]
         @user = User.where(uid: token).first
         if @user != nil
@@ -92,7 +92,7 @@ module API
       params do
         requires :id, type: String, desc: 'ID of the reply'
       end
-      reply ":id/downvote" do
+      post ":id/downvote" do
         token = request.headers["Authentication"]
         @user = User.where(uid: token).first
         if @user != nil
