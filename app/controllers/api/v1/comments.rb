@@ -24,7 +24,7 @@ module API
         get ":id/replies" do
           Reply.all.where(comment_id: permitted_params[:id]).order('points')
         end
-        
+
         desc "Create a new comment"
         params do
           requires :content, type: String
@@ -96,12 +96,12 @@ module API
             if @user != nil
               @comment = Comment.where(id: permitted_params[:id]).first!
               if @user.id != @comment.user_id
-                if !@user.upvoted?(@comment)
-                  @user.upvote(@comment)
+                if !@user.upvoted_comment?(@comment)
+                  @user.upvote_comment(@comment)
                 end
                 @comment.calc_hot_score
               else
-                error!('Unauthorized.', 401)
+                error!('Forbidden.', 403)
               end
             else
               error!('Unauthorized.', 401)
@@ -118,12 +118,12 @@ module API
             if @user != nil
               @comment = Comment.where(id: permitted_params[:id]).first!
               if @user.id != @comment.user_id
-                if @user.upvoted?(@comment)
-                  @user.remove_vote(@comment)
+                if @user.upvoted_comment?(@comment)
+                  @user.remove_comment_vote(@comment)
                 end
                 @comment.calc_hot_score
               else
-                error!('Denied AutoVote.',401)
+                error!('Forbidden',403)
               end
             else
               error!('Unauthorized.', 401)
