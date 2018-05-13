@@ -68,7 +68,7 @@ module API
             @user = User.where(uid: token).first
             if @user != nil
               @reply = Reply.where(id: permitted_params[:id]).first!
-              if @user.id == @reply.user_id
+              if @user.id != @reply.user_id
                 if @user.upvoted_reply?(@reply)
                   error!('Forbidden.', 403)
                 end
@@ -91,7 +91,7 @@ module API
               @user = User.where(uid: token).first
               if @user != nil
                 @reply = Reply.where(id: permitted_params[:id]).first!
-                if @user.id == @reply.user_id
+                if @user.id != @reply.user_id
                   if !@user.upvoted_reply?(@reply)
                     error!('Forbidden.', 403)
                   end
