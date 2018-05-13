@@ -25,6 +25,11 @@ module API
           Reply.all.where(comment_id: permitted_params[:id]).order('points')
         end
         
+        desc "Create a new comment"
+        params do
+          requires :content, type: String
+          requires :post_id, type: String
+        end
         post "add" do
           token = request.headers["Authentication"]
           if token == nil
@@ -33,9 +38,7 @@ module API
           user = User.where(uid: token).first
           if user != nil
             @comment = Comment.new(params)
-            @comment.post_id = :id
             @comment.user_id = user.id
-            @comment.user_name = user.name
             @comment.points = 0
             @comment.save
           else
@@ -65,6 +68,7 @@ module API
         desc "Edit a comment"
         params do
           requires :id, type: String, desc: "ID of the comment"
+          requires :content, type: String
         end
         put ":id" do
           token = request.headers["Authentication"]
@@ -72,7 +76,7 @@ module API
             error!('Unauthorized.', 401)
           end
           @user = User.where(uid: token).first
-          @comment = Post.where(id: permitted_params[:id]).first!
+          @comment = Comment.where(id: permitted_params[:id]).first!
           if @user && @user.id == @comment.user_id
             @comment.content = params[:content]
             @comment.save
