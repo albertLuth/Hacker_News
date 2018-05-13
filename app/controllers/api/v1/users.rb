@@ -28,6 +28,19 @@ module API
               error!('Forbidden.', 403)
             end
           end
+
+          desc "Show Threads"
+          params do
+            requires :id, type: String, desc: "ID of the user"
+          end
+          
+          get ":id/threads" do
+            @miscomments = Comment.all.where(user_id: permitted_params[:id]).order('points DESC')
+            @miscomments.each do |comment|
+              Reply.all.where(comment_id: comment.id)
+            end
+            Reply.all.where(user_id: permitted_params[:id]).order('points DESC')
+          end
         end
       end
     end

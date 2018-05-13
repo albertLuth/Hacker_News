@@ -68,3 +68,22 @@ paths:
           description: "Unauthorized"
         403:
           description: "Forbidden"
+  /users/{UserId}/threads:
+    get:
+      tags:
+        - "User"
+        summary: "Returns threads for a user"
+        produces:
+        - "application/json"
+        parameters:
+        - name: "UserId"
+          in: "path"
+          description: "User id to get"
+          required: true
+          type: "integer"
+          format: "int64"
+        responses:
+          200:
+            description: "successful operation"
+          404:
+            description: "Not found"
