@@ -108,12 +108,11 @@ paths:
           description: "Content of the reply"
           required: true
           type: "string"
-        - name: "ID Comment"
+        - name: "comment_id"
           in: "formData"
           description: "Id Comment of the Reply"
           required: true
-          type: "integer"
-          format: "int64"
+          type: string
         - name: "Authentication"
           in: "header"
           description: "An authorization header"
