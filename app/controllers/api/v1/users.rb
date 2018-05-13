@@ -35,14 +35,16 @@ module API
           end
 
           get ":id/threads" do
-=begin
             @miscomments = Comment.all.where(user_id: permitted_params[:id]).order('points DESC')
+=begin
             @miscomments.each do |comment|
               Reply.all.where(comment_id: comment.id)
             end
 =end
+=begin
             Comment.all.where(user_id: permitted_params[:id]).order('points DESC')
             Reply.all.where(user_id: permitted_params[:id]).order('points DESC')
+=end
           end
         end
       end
