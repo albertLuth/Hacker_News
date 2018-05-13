@@ -1,0 +1,680 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Swagger HACKER NEWS"
+host: "asw-1199476051.herokuapp.com"
+basePath: "/api/v1"
+schemes:
+- "http"
+- "https"
+paths:
+  /users/{UserId}:
+    get:
+      tags:
+      - "User"
+      summary: "Returns a user"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "UserId"
+        in: "path"
+        description: "User id to get"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        404:
+          description: "Not found"
+  /users:
+    put:
+      tags:
+      - "User"
+      summary: "Modifies a user"
+      description: ""
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "formData"
+        description: "Name of the user"
+        required: false
+        type: "string"
+        format: "int64"
+      - name: "email"
+        in: "formData"
+        description: "Email of the user"
+        required: false
+        type: "string"
+      - name: "about"
+        in: "formData"
+        description: "Text of the post"
+        required: false
+        type: "string"
+      - name: "Authentication"
+        in: "header"
+        description: "An authorization header"
+        required: true
+        type: string
+      responses:
+        200:
+          description: "successful operation"
+        404:
+          description: "Not found"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+  /users/{UserId}/threads:
+    get:
+      tags:
+      - "User"
+      summary: "Returns threads for a user"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "UserId"
+        in: "path"
+        description: "User id to get"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        404:
+          description: "Not found"
+  /posts:
+    get:
+      tags:
+        - Posts
+      summary: Returns all posts with url sorted by points
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+  /posts/newest:
+    get:
+      tags:
+        - Posts
+      summary: Returns all posts sorted by date
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+  /posts/ask:
+    get:
+      tags:
+        - Posts
+      summary: Returns all questions sorted by date
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+  '/posts/{PostId}/comments':
+    get:
+      tags:
+        - Posts
+      summary: Returns all comments from a post
+      produces:
+        - application/json
+      parameters:
+        - name: PostId
+          in: path
+          description: Post id to get
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Post not found
+  /posts/add:
+    post:
+      tags:
+        - Posts
+      summary: Adds a new post
+      description: ''
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - name: title
+          in: formData
+          description: Title of the post
+          required: true
+          type: string
+          format: int64
+        - name: url
+          in: formData
+          description: URL of the post
+          required: false
+          type: string
+        - name: text
+          in: formData
+          description: Text of the post
+          required: false
+          type: string
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/posts/{PostId}':
+    get:
+      tags:
+        - Posts
+      summary: Returns a post
+      produces:
+        - application/json
+      parameters:
+        - name: PostId
+          in: path
+          description: Post id to get
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - Posts
+      summary: Deletes a post
+      description: ''
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - name: PostId
+          in: path
+          description: Post id to delete
+          required: true
+          type: integer
+          format: int64
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+    put:
+      tags:
+        - Posts
+      summary: Modifies a post
+      description: ''
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - name: PostId
+          in: path
+          description: Post id to edit
+          required: true
+          type: integer
+          format: int64
+        - name: title
+          in: formData
+          description: Title of the post
+          required: true
+          type: string
+          format: int64
+        - name: url
+          in: formData
+          description: URL of the post
+          required: false
+          type: string
+        - name: text
+          in: formData
+          description: Text of the post
+          required: false
+          type: string
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  '/posts/{PostId}/upvote':
+    post:
+      tags:
+        - Posts
+      summary: Upvote a post
+      produces:
+        - application/json
+      parameters:
+        - name: PostId
+          in: path
+          description: Post id to vote
+          required: true
+          type: integer
+          format: int64
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '402':
+          description: can't vote
+        '404':
+          description: Not found
+  '/posts/{PostId}/downvote':
+    post:
+      tags:
+        - Posts
+      summary: Upvote a post
+      produces:
+        - application/json
+      parameters:
+        - name: PostId
+          in: path
+          description: Post id to unvote
+          required: true
+          type: integer
+          format: int64
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not found
+  /comments/add:
+    post:
+      tags:
+        - Comments
+      summary: Adds a new comment
+      description: ''
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - name: content
+          in: formData
+          description: Content of the comment
+          required: false
+          type: string
+          format: int64
+        - name: post_id
+          in: formData
+          description: ID of the post
+          required: true
+          type: string
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/comments/{CommentId}':
+    get:
+      tags:
+        - Comments
+      summary: Returns a comment
+      produces:
+        - application/json
+      parameters:
+        - name: CommentId
+          in: path
+          description: Comment id to get
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - Comments
+      summary: Deletes a comment
+      description: ''
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - name: CommentId
+          in: path
+          description: Comments id to delete
+          required: true
+          type: integer
+          format: int64
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+    put:
+      tags:
+        - Comments
+      summary: Modifies a comment
+      description: ''
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - name: CommentId
+          in: path
+          description: Comment id to edit
+          required: true
+          type: integer
+          format: int64
+        - name: content
+          in: formData
+          description: Content of the comment
+          required: true
+          type: string
+          format: int64
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+  '/comments/{CommentId}/replies':
+    get:
+      tags:
+        - Comments
+      summary: Returns all replies from a comment
+      produces:
+        - application/json
+      parameters:
+        - name: CommentId
+          in: path
+          description: Comment id to get
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Comment not found
+  '/comments/{CommentId}/upvote':
+    post:
+      tags:
+        - Comments
+      summary: Upvote a comment
+      produces:
+        - application/json
+      parameters:
+        - name: CommentId
+          in: path
+          description: Comment id to vote
+          required: true
+          type: integer
+          format: int64
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '402':
+          description: can't vote
+        '404':
+          description: Not found
+  '/comments/{CommentId}/downvote':
+    post:
+      tags:
+        - Comments
+      summary: Upvote a comment
+      produces:
+        - application/json
+      parameters:
+        - name: CommentId
+          in: path
+          description: Comment id to unvote
+          required: true
+          type: integer
+          format: int64
+        - name: Authentication
+          in: header
+          description: An authorization header
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Not found
+  /replies/{ReplyId}:
+      get:
+        tags:
+        - "Replies"
+        summary: "Returns a reply"
+        produces:
+        - "application/json"
+        parameters:
+        - name: "ReplyId"
+          in: "path"
+          description: "Reply id to get"
+          required: true
+          type: "integer"
+          format: "int64"
+        responses:
+          200:
+            description: "successful operation"
+          404:
+            description: "Not found"
+      delete:
+        tags:
+        - "Replies"
+        summary: "Deletes a reply"
+        description: ""
+        consumes:
+        - "multipart/form-data"
+        produces:
+        - "application/json"
+        parameters:
+        - name: "ReplyId"
+          in: "path"
+          description: "Reply id to delete"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "Authentication"
+          in: "header"
+          description: "An authorization header"
+          required: true
+          type: string
+        responses:
+          200:
+            description: "successful operation"
+          404:
+            description: "Not found"
+          401:
+            description: "Unauthorized"
+          403:
+            description: "Forbidden"
+      put:
+        tags:
+        - "Replies"
+        summary: "Modifies a reply"
+        description: ""
+        consumes:
+        - "multipart/form-data"
+        produces:
+        - "application/json"
+        parameters:
+        - name: "ReplyId"
+          in: "path"
+          description: "Reply id to edit"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "content"
+          in: "formData"
+          description: "Content of the reply"
+          required: true
+          type: "string"
+        - name: "Authentication"
+          in: "header"
+          description: "An authorization header"
+          required: true
+          type: string
+        responses:
+          200:
+            description: "successful operation"
+          404:
+            description: "Not found"
+          401:
+            description: "Unauthorized"
+          403:
+            description: "Forbidden"
+  /replies/add:
+      post:
+        tags:
+        - "Replies"
+        summary: "Adds a new reply"
+        description: ""
+        consumes:
+        - "multipart/form-data"
+        produces:
+        - "application/json"
+        parameters:
+        - name: "content"
+          in: "formData"
+          description: "Content of the reply"
+          required: true
+          type: "string"
+        - name: "comment_id"
+          in: "formData"
+          description: "Id Comment of the Reply"
+          required: true
+          type: string
+        - name: "Authentication"
+          in: "header"
+          description: "An authorization header"
+          required: true
+          type: string
+        responses:
+          200:
+            description: "successful operation"
+          401:
+            description: "Unauthorized"
+          403:
+            description: "Forbidden"
+  /replies/{ReplyId}/upvote:
+      post:
+        tags:
+        - "Replies"
+        summary: "Upvote a reply"
+        produces:
+        - "application/json"
+        parameters:
+        - name: "ReplyId"
+          in: "path"
+          description: "Reply id to vote"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "Authentication"
+          in: "header"
+          description: "An authorization header"
+          required: true
+          type: string
+        responses:
+          200:
+            description: "successful operation"
+          402:
+            description: "can't vote"
+          404:
+            description: "Not found"
+  /replies/{ReplyId}/downvote:
+      post:
+        tags:
+        - "Replies"
+        summary: "Upvote a reply"
+        produces:
+        - "application/json"
+        parameters:
+        - name: "ReplyId"
+          in: "path"
+          description: "Reply id to unvote"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "Authentication"
+          in: "header"
+          description: "An authorization header"
+          required: true
+          type: string
+        responses:
+          200:
+            description: "successful operation"
+          404:
+            description: "Not found"
