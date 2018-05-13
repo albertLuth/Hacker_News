@@ -92,39 +92,42 @@ module API
             if @user != nil
               @comment = Comment.where(id: permitted_params[:id]).first!
               if @user.id != @comment.user_id
+                if @user.upvoted_comment?(@comment)
+                  error!('Forbidden.', 403)
+                end
                 if !@user.upvoted_comment?(@comment)
                   @user.upvote_comment(@comment)
+                  @comment.calc_hot_score
                 end
-                @comment.calc_hot_score
               else
-                error!('Forbidden.', 403)
+                error!('Unauthorized.', 401)
               end
-            else
-              error!('Unauthorized.', 401)
             end
           end
 
-        desc "Downvote a comment"
-          params do
-            requires :id, type: String, desc: "ID of the comment"
-          end
-          post ":id/downvote" do
-            token = request.headers["Authentication"]
-            @user = User.where(uid: token).first
-            if @user != nil
-              @comment = Comment.where(id: permitted_params[:id]).first!
-              if @user.id != @comment.user_id
-                if @user.upvoted_comment?(@comment)
-                  @user.remove_comment_vote(@comment)
-                end
-                @comment.calc_hot_score
-              else
-                error!('Forbidden',403)
-              end
-            else
-              error!('Unauthorized.', 401)
+          desc "Downvote a comment"
+            params do
+              requires :id, type: String, desc: "ID of the comment"
             end
-          end
+            post ":id/downvote" do
+              token = request.headers["Authentication"]
+              @user = User.where(uid: token).first
+              if @user != nil
+                @comment = Comment.where(id: permitted_params[:id]).first!
+                if @user.id != @comment.user_id
+                  if !@user.upvoted_comment?(@comment)
+                     error!('Forbidden.', 403)
+                  end
+                  if @user.upvoted_comment?(@comment)
+                    @user.remove_comment_vote(@comment)
+                    @comment.calc_hot_score
+                  end
+                else
+                  error!('Unauthorized.', 401)
+                end
+              end
+            end
+
       end
     end
   end
