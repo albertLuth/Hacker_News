@@ -42,7 +42,7 @@ module API
         desc "Edit a reply"
         params do
           requires :id, type: String, desc: 'ID of the reply'
-          requires :title, type: String
+          requires :content, type: String
         end
         put ":id" do
           token = request.headers["Authentication"]
