@@ -33,12 +33,15 @@ module API
           params do
             requires :id, type: String, desc: "ID of the user"
           end
-          
+
           get ":id/threads" do
+=begin
             @miscomments = Comment.all.where(user_id: permitted_params[:id]).order('points DESC')
             @miscomments.each do |comment|
               Reply.all.where(comment_id: comment.id)
             end
+=end
+            Comment.all.where(user_id: permitted_params[:id]).order('points DESC')
             Reply.all.where(user_id: permitted_params[:id]).order('points DESC')
           end
         end
