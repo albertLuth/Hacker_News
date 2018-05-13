@@ -15,6 +15,16 @@ module API
         params do
           requires :id, type: String, desc: "ID of the post"
         end
+
+        desc "Return all replies from a comment"
+        params do
+          requires :id, type: String, desc: "ID of the
+              comment"
+        end
+        get ":id/replies" do
+          Reply.all.where(comment_id: permitted_params[:id]).order('points')
+        end
+        
         post "add" do
           token = request.headers["Authentication"]
           if token == nil

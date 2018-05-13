@@ -127,6 +127,25 @@ paths:
           description: Forbidden
         '404':
           description: Not found
+  '/comments/{CommentId}/replies':
+    get:
+      tags:
+        - Comments
+      summary: Returns all replies from a comment
+      produces:
+        - application/json
+      parameters:
+        - name: CommentId
+          in: path
+          description: Comment id to get
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Comment not found
   '/comments/{CommentId}/upvote':
     post:
       tags:
