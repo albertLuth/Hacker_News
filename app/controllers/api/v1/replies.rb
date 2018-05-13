@@ -60,48 +60,50 @@ module API
         end
 
         desc "Upvote a reply"
-        params do
-          requires :id, type: String, desc: 'ID of the reply'
-        end
-        post ":id/upvote" do
-          token = request.headers["Authentication"]
-          @user = User.where(uid: token).first
-          if @user != nil
-            @reply = reply.where(id: permitted_params[:id]).first!
-            if @user.id != @reply.user_id
-              if !@user.upvoted_reply?(@reply)
-                @user.upvote_reply(@reply)
-              end
-              @reply.calc_hot_score
-            else
-              error!('Unauthorized.', 401)
-            end
-          else
-            error!('Unauthorized.', 401)
+          params do
+            requires :id, type: String, desc: "ID of the reply"
           end
-        end
+          post ":id/upvote" do
+            token = request.headers["Authentication"]
+            @user = User.where(uid: token).first
+            if @user != nil
+              @reply = Reply.where(id: permitted_params[:id]).first!
+              if @user.id == @reply.user_id
+                if @user.upvoted_reply?(@reply)
+                  error!('Forbidden.', 403)
+                end
+                if !@user.upvoted_reply?(@reply)
+                  @user.upvote_reply(@reply)
+                  @reply.calc_hot_score
+                end
+              else
+                error!('Unauthorized.', 401)
+              end
+            end
+          end
 
-        desc "Downvote a reply"
-        params do
-          requires :id, type: String, desc: 'ID of the reply'
-        end
-        post ":id/downvote" do
-          token = request.headers["Authentication"]
-          @user = User.where(uid: token).first
-          if @user != nil
-            @reply = Reply.where(id: permitted_params[:id]).first!
-            if @user.id != @reply.user_id
-              if @user.upvoted_reply?(@reply)
-                @user.remove_reply_vote(@reply)
-              end
-              @reply.calc_hot_score
-            else
-              error!('Denied AutoVote.',401)
+          desc "Downvote a reply"
+            params do
+              requires :id, type: String, desc: "ID of the reply"
             end
-          else
-            error!('Unauthorized.', 401)
-          end
-        end
+            post ":id/downvote" do
+              token = request.headers["Authentication"]
+              @user = User.where(uid: token).first
+              if @user != nil
+                @reply = Reply.where(id: permitted_params[:id]).first!
+                if @user.id == @reply.user_id
+                  if !@user.upvoted_reply?(@reply)
+                    error!('Forbidden.', 403)
+                  end
+                  if @user.upvoted_reply?(@reply)
+                    @user.remove_reply_vote(@reply)
+                    @reply.calc_hot_score
+                  end
+                else
+                  error!('Unauthorized.', 401)
+                end
+              end
+            end
 
         desc "Delete a reply"
         params do

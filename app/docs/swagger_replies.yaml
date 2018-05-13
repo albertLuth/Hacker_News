@@ -155,7 +155,7 @@ paths:
       post:
         tags:
         - "Replies"
-        summary: "Upvote a reply"
+        summary: "Downvote a reply"
         produces:
         - "application/json"
         parameters:

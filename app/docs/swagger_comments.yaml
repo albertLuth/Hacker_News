@@ -176,7 +176,7 @@ paths:
     post:
       tags:
         - Comments
-      summary: Upvote a comment
+      summary: Downvote a comment
       produces:
         - application/json
       parameters:
