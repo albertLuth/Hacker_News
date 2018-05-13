@@ -93,7 +93,7 @@ paths:
           403:
             description: "Forbidden"
   /replies/add:
-      reply:
+      post:
         tags:
         - "Replies"
         summary: "Adds a new reply"
@@ -127,7 +127,7 @@ paths:
           403:
             description: "Forbidden"
   /replies/{ReplyId}/upvote:
-      reply:
+      post:
         tags:
         - "Replies"
         summary: "Upvote a reply"
@@ -153,7 +153,7 @@ paths:
           404:
             description: "Not found"
   /replies/{ReplyId}/downvote:
-      reply:
+      post:
         tags:
         - "Replies"
         summary: "Upvote a reply"
