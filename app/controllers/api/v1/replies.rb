@@ -68,8 +68,8 @@ module API
           if @user != nil
             @reply = reply.where(id: permitted_params[:id]).first!
             if @user.id != @reply.user_id
-              if !@user.upvoted?(@reply)
-                @user.upvote(@reply)
+              if !@user.upvoted_reply?(@reply)
+                @user.upvote_reply(@reply)
               end
               @reply.calc_hot_score
             else
@@ -90,8 +90,8 @@ module API
           if @user != nil
             @reply = Reply.where(id: permitted_params[:id]).first!
             if @user.id != @reply.user_id
-              if @user.upvoted?(@reply)
-                @user.remove_vote(@reply)
+              if @user.upvoted_reply?(@reply)
+                @user.remove_reply_vote(@reply)
               end
               @reply.calc_hot_score
             else
