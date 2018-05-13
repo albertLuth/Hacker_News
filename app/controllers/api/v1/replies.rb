@@ -20,7 +20,8 @@ module API
 
         desc "Create a new reply"
         params do
-          requires :id, type: String, desc: 'ID of the comment'
+          requires :content, type: String
+          requires :comment_id, type: String
         end
         post "add" do
           token = request.headers["Authentication"]
