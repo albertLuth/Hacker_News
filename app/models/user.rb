@@ -7,7 +7,15 @@ class User < ApplicationRecord
           user.email = auth.info.email
           user.oauth_token = auth.credentials.token
           user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-          user.save!
+          begin
+            user2 = User.where(uid: user.uid).first!
+          rescue ActiveRecord::RecordNotFound
+            user.save!
+            return user
+          end
+          print "SURT"
+          print user.name
+          return user2    
         end
       end
       def owns_post?(post)
