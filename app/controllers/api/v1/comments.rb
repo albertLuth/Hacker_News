@@ -91,11 +91,10 @@ module API
             @user = User.where(uid: token).first
             if @user != nil
               @comment = Comment.where(id: permitted_params[:id]).first!
-              if @user.id != @comment.user_id
+              if @user.id == @comment.user_id
                 if @user.upvoted_comment?(@comment)
                   error!('Forbidden.', 403)
-                end
-                if !@user.upvoted_comment?(@comment)
+                elsif !@user.upvoted_comment?(@comment)
                   @user.upvote_comment(@comment)
                   @comment.calc_hot_score
                 end

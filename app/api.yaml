@@ -303,7 +303,7 @@ paths:
     post:
       tags:
         - Posts
-      summary: Upvote a post
+      summary: Downvote a post
       produces:
         - application/json
       parameters:
@@ -491,7 +491,7 @@ paths:
     post:
       tags:
         - Comments
-      summary: Upvote a comment
+      summary: Downvote a comment
       produces:
         - application/json
       parameters:
@@ -658,7 +658,7 @@ paths:
       post:
         tags:
         - "Replies"
-        summary: "Upvote a reply"
+        summary: "Downvote a reply"
         produces:
         - "application/json"
         parameters:
