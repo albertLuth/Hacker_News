@@ -13,8 +13,6 @@ class User < ApplicationRecord
             user.save!
             return user
           end
-          print "SURT"
-          print user.name
           return user2    
         end
       end
