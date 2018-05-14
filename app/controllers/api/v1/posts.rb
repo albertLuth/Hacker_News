@@ -102,48 +102,49 @@ module API
         end
 
         desc "Upvote a post"
-        params do
-          requires :id, type: String, desc: 'ID of the post'
-        end
-        post ":id/upvote" do
-          token = request.headers["Authentication"]
-          @user = User.where(uid: token).first
-          if @user != nil
-            @post = Post.where(id: permitted_params[:id]).first!
-            if @user.id != @post.user_id
-              if !@user.upvoted?(@post)
-                @user.upvote(@post)
-              end
-              @post.calc_hot_score
-            else
-              error!('Unauthorized.', 401)
-            end
-          else
-            error!('Unauthorized.', 401)
+          params do
+            requires :id, type: String, desc: "ID of the post"
           end
-        end
+          post ":id/upvote" do
+            token = request.headers["Authentication"]
+            @user = User.where(uid: token).first
+            if @user != nil
+              @post = Post.where(id: permitted_params[:id]).first!
+              if @user.id != @post.user_id
+                if @user.upvoted?(@post)
+                  error!('Forbidden.', 403)
+                elsif !@user.upvoted?(@post)
+                  @user.upvote(@post)
+                  @post.calc_hot_score
+                end
+              else
+                error!('Unauthorized.', 401)
+              end
+            end
+          end
 
-        desc "Downvote a post"
-        params do
-          requires :id, type: String, desc: 'ID of the post'
-        end
-        post ":id/downvote" do
-          token = request.headers["Authentication"]
-          @user = User.where(uid: token).first
-          if @user != nil
-            @post = Post.where(id: permitted_params[:id]).first!
-            if @user.id != @post.user_id
-              if @user.upvoted?(@post)
-                @user.remove_vote(@post)
-              end
-              @post.calc_hot_score
-            else
-              error!('Denied AutoVote.',401)
+          desc "Downvote a post"
+            params do
+              requires :id, type: String, desc: "ID of the post"
             end
-          else
-            error!('Unauthorized.', 401)
-          end
-        end
+            post ":id/downvote" do
+              token = request.headers["Authentication"]
+              @user = User.where(uid: token).first
+              if @user != nil
+                @post = Post.where(id: permitted_params[:id]).first!
+                if @user.id != @post.user_id
+                  if !@user.upvoted?(@post)
+                     error!('Forbidden.', 403)
+                  end
+                  if @user.upvoted?(@post)
+                    @user.remove_vote(@post)
+                    @post.calc_hot_score
+                  end
+                else
+                  error!('Unauthorized.', 401)
+                end
+              end
+            end
 
       end
     end
